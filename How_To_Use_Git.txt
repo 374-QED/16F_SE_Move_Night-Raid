@@ -1,0 +1,29 @@
+*************************************************************
+*************************************************************
+First thing to do whenever you start working on the project!
+*************************************************************
+*************************************************************
+$ git pull
+
+
+This allows the changes that have been made by other to
+update to your local repository
+
+
+
+
+*************************************************************
+If you made changes on your local repository and you want to
+add them to the remote repository then first...
+*************************************************************
+$ git add *
+
+$git commit -m "Put your stupid message here"
+
+
+
+*************************************************************
+Then you want to push the changes you made to the remote
+repository so everyone else in your team and be updated
+*************************************************************
+$ git push
