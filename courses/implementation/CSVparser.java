@@ -22,8 +22,8 @@ public class CSVparser {
 
                 // use comma as separator
                 String[] data = line.split(",");
-                if(data[2].equals(course)) {
-                	list.add(data[1]);
+                if(data[2].replace("\"", "").equals(course)) {
+                	list.add(data[1].replace("\"", ""));
                 }
             }
 
