@@ -10,7 +10,7 @@ public class CSVparser {
 
 	public List<String> parseClass(String course) {
 		
-		String csvFile = "C:\\Users\\aldo_\\OneDrive\\Documents\\GitHub\\F16_CS374_Night-Raid\\courses\\resources\\courses.csv";
+		String csvFile = "C:/Users/Nattapat White/Documents/F16_CS374_Night-Raid/courses/resources/courses.csv";
 		BufferedReader br = null;
 		String line = "";
 		List<String> list = new ArrayList<String>();
@@ -49,11 +49,42 @@ public class CSVparser {
 	// 	// taken by this student
 	// }
 
-	// public String[] parsePreReq(String class) {
+	public List<String> parsePreReq(String preq) {
 	// 	// Will parse the csv file, using the "class" argument
 	// 	// to get an array of strings that contains the prerequisites
 	// 	// of the class
-	// }
+    String csvFile = "C:/Users/Nattapat White/Documents/F16_CS374_Night-Raid/courses/resources/prerequisites.csv";
+        BufferedReader br = null;
+        String line = "";
+        List<String> list1 = new ArrayList<String>();
+
+        try {
+
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] data = line.split(",");
+                if(data[0].equals(preq)) {
+                    list1.add(data[1]);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return list1;
+        }
+	}
 
 	
 }
