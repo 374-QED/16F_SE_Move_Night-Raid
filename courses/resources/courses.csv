@@ -1,4 +1,4 @@
 ID,student_name,course
-"001","Aldo Anaya","CS374"
-"002","Darius Bell","CS120"
-"003","","CS130"
+1,Aldo Anaya,CS374
+2,Darius Bell,CS120
+3,,CS130
