@@ -1,4 +1,4 @@
-crn,student_name,course
+ID,student_name,course
 "001","Aldo Anaya","CS374"
-"002","Aldo Anaya","CS120"
-"003","Aldo Anaya","CS130"
+"002","Darius Bell","CS120"
+"003","","CS130"
