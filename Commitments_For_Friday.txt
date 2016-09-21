@@ -1,0 +1,4 @@
+Commitments for Friday:
+
+1. Be able to Pass a real test in cucumber batch file.
+2. Make methods in CSVparser.java work
