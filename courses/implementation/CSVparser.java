@@ -22,7 +22,7 @@ public class CSVparser {
 
                 // use comma as separator
                 String[] data = line.split(",");
-                if(data[2].replace("\"", "").equals(course)) {
+                if(data[0].replace("\"", "").equals(course)) {
                 	list.add(data[1].replace("\"", ""));
                 }
             }
@@ -43,11 +43,43 @@ public class CSVparser {
         }
 	}
 
-	//public String[] parseStudent(String studentID) {
+	public List<String> parseStudent(String studentName) {
 	// 	// Will parse the csv file, using the "studentID" argument
 	// 	// to get an array of strings that contains the classes
 	// 	// taken by this student
-	// }
+        String csvFile = "C:/Users/Nattapat White/Documents/F16_CS374_Night-Raid/courses/resources/courses.csv";
+        BufferedReader br = null;
+        String line = "";
+        List<String> list = new ArrayList<String>();
+
+        try {
+
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] data = line.split(",");
+                if(data[1].replace("\"", "").equals(studentName)) {
+                    list.add(data[2].replace("\"", ""));
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return list;
+        }
+
+	}
 
 	public List<String> parsePreReq(String preq) {
 	// 	// Will parse the csv file, using the "class" argument
