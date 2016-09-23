@@ -19,11 +19,14 @@ public class CSVparser {
 
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
-
+                String hold = "";
                 // use comma as separator
                 String[] data = line.split(",");
-                if(data[0].replace("\"", "").equals(course)) {
-                	list.add(data[1].replace("\"", ""));
+
+                if(data[2].replace("\"", "").equals(course)) {
+                	hold = data[1].replace("\"", "");
+                    hold = hold.replaceAll("^\"|\"$", "");
+                    list.add(hold);
                 }
             }
 
@@ -56,13 +59,16 @@ public class CSVparser {
 
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
-
+                String hold = "";
                 // use comma as separator
                 String[] data = line.split(",");
                 if(data[1].replace("\"", "").equals(studentName)) {
-                    list.add(data[2].replace("\"", ""));
+                    hold = data[2].replace("\"", "");
+                    hold = hold.replaceAll("^\"|\"$", "");
+                    list.add(hold);
                 }
             }
+            list.remove(0);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -88,7 +94,7 @@ public class CSVparser {
     String csvFile = "C:/Users/Nattapat White/Documents/F16_CS374_Night-Raid/courses/resources/prerequisites.csv";
         BufferedReader br = null;
         String line = "";
-        List<String> list1 = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
 
         try {
 
@@ -96,11 +102,14 @@ public class CSVparser {
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator
+                String hold = "";
                 String[] data = line.split(",");
-                if(data[0].equals(preq)) {
-                    list1.add(data[1]);
-                }
+                if(data[0].equals(preq)) 
+                    hold = data[1].replace("\"", "");
+                    hold = hold.replaceAll("^\"|\"$", "");
+                    list.add(hold);
             }
+            list.remove(0);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -114,7 +123,7 @@ public class CSVparser {
                     e.printStackTrace();
                 }
             }
-            return list1;
+            return list;
         }
 	}
 
