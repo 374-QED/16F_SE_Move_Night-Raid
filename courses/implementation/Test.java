@@ -8,11 +8,12 @@ class Test {
 	public static void main(String[] args)
 	{
 		CSVparser csvParser = new CSVparser();
+		String hold = "CS374";
 		List<String> someList1 = new ArrayList<String>(csvParser.parsePreReq("\"CS374\""));
-		//List<String> someList1 = new ArrayList<String>(csvParser.parseClass("CS374"));
+		List<String> someList2 = new ArrayList<String>(csvParser.parseSemester("\"CS374\""));
 		//List<String> someList1 = new ArrayList<String>(csvParser.parseStudent("Aldo Anaya"));
 
-		//System.out.println(someList);
-		System.out.println(someList1.get(1));
+		System.out.println(someList2);
+		System.out.println(someList1);
 	}
 }

@@ -12,6 +12,7 @@ public class CoursesTest {
 
 	CSVparser csvParser = new CSVparser();
 	List<String> students = new ArrayList<String>();
+	List<String> pop = new ArrayList<String>();
 	String holding;
 
 	@Given("^the course \"([^\"]*)\"\\.$")
@@ -19,11 +20,12 @@ public class CoursesTest {
 	   	holding = course;
 	}
 
-	@Then("^\"([^\"]*)\" is required\\.$")
-	public void isRequired(String preq) throws Throwable {
+	@Then("^\"([^\"]*)\" offered in the \"([^\"]*)\" is required\\.$")
+	public void offeredInTheIsRequired(String preq, String mester) throws Throwable {
 		students = csvParser.parsePreReq("\"CS374\"");
+		pop = csvParser.parseSemester("\"CS374\"");
 		assertEquals(students.contains(preq),true);
-
+		assertEquals(pop.contains(mester),true);
 	}
 
 	@Then("^\"(.+)\" is suppose to be in that course\\.$")
