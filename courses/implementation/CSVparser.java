@@ -1,6 +1,7 @@
 package implementation;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +11,7 @@ public class CSVparser {
 
 	public List<String> parseClass(String course) {
 		
-		String csvFile = "C:/Users/Nattapat White/Documents/F16_CS374_Night-Raid/courses/resources/courses.csv";
+		String csvFile = new File("resources\\courses.csv").getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		List<String> list = new ArrayList<String>();
@@ -50,7 +51,7 @@ public class CSVparser {
 	// 	// Will parse the csv file, using the "studentID" argument
 	// 	// to get an array of strings that contains the classes
 	// 	// taken by this student
-        String csvFile = "C:/Users/Nattapat White/Documents/F16_CS374_Night-Raid/courses/resources/courses.csv";
+        String csvFile = new File("resources\\courses.csv").getAbsolutePath();
         BufferedReader br = null;
         String line = "";
         List<String> list = new ArrayList<String>();
@@ -91,7 +92,7 @@ public class CSVparser {
 	// 	// Will parse the csv file, using the "class" argument
 	// 	// to get an array of strings that contains the prerequisites
 	// 	// of the class
-    String csvFile = "C:/Users/Nattapat White/Documents/F16_CS374_Night-Raid/courses/resources/prerequisites.csv";
+    String csvFile = new File("resources\\prerequisites.csv").getAbsolutePath();
         BufferedReader br = null;
         String line = "";
         List<String> list = new ArrayList<String>();
@@ -130,7 +131,7 @@ public class CSVparser {
     //  // Will parse the csv file, using the "class" argument
     //  // to get an array of strings that contains the prerequisites
     //  // of the class
-    String csvFile = "C:/Users/Nattapat White/Documents/F16_CS374_Night-Raid/courses/resources/prerequisites.csv";
+    String csvFile = new File("resources\\prerequisites.csv").getAbsolutePath();
         BufferedReader br = null;
         String line = "";
         List<String> list = new ArrayList<String>();
