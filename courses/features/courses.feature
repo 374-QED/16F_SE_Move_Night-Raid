@@ -15,7 +15,7 @@ Feature: Courses
     | "BIBD620" | "Carey Posh" |
     | "BIOL312" | "Brent Revees" |
 
-   Scenario: finding prerequesite of a class
+    Scenario: finding prerequesite of a class
 		Given the course "CS374".
 		Then "CS120" is required.
 		And "CS130" is required.
@@ -26,7 +26,7 @@ Feature: Courses
 		Given the student name "Aldo Anaya".
 		Then the student need to retake "CS120".
 
-  Scenario Outline: finding prerequesite of a class
+	Scenario Outline: finding prerequesite of a class
    	Given the course <class>.
     Then <preq1> offered in the <sem1> is required.
     And <preq2> offered in the <sem2> is required.

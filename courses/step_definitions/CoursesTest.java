@@ -28,28 +28,26 @@ public class CoursesTest {
 	@Then("^the student need to retake \"([^\"]*)\"\\.$")
 	public void theStudentNeedToRetake(String course) throws Throwable
 	{
-		//students = csvParser.parseStudent(holding);
-		//assertEquals(students.contains(course),true);
+		students = csvParser.parseStudent(holding);
+		assertEquals(students.contains(course),true);
 	}
 
 	@Then("^\"([^\"]*)\" is required\\.$")
 	public void isRequired(String preq) throws Throwable {
-		//students = csvParser.parsePreReq(holding);
-		//System.out.println(holding);
-		//assertEquals(students.contains(preq),true);
+		students = csvParser.parsePreReq(holding);
+		assertEquals(students.contains(preq),true);
 	}
 	@Then("^\"([^\"]*)\" offered in the \"([^\"]*)\" is required\\.$")
 	public void offeredInTheIsRequired(String preq, String mester) throws Throwable {
-		//students = csvParser.parsePreReq("\"CS374\"");
-		//pop = csvParser.parseSemester("\"CS374\"");
-		//assertEquals(students.contains(preq),true);
-		//assertEquals(pop.contains(mester),true);
+		students = csvParser.parsePreReq(holding);
+		pop = csvParser.parseSemester(holding);
+		assertEquals(students.contains(preq),pop.contains(mester));
 	}
 
-	@Then("^\"(.+)\" is suppose to be in that course\\.$")
+	@Then("^\"([^\"]*)\" is suppose to be in that course\\.$")
 	public void isNotSupposeToBeInThatCourse(String arg1) throws Throwable {
-		//students = csvParser.parseClass(holding);
-	   //assertEquals(students.contains(arg1), true);
+		students = csvParser.parseClass(holding);
+	   assertEquals(students.contains(arg1), true);
 	
 	}
 
