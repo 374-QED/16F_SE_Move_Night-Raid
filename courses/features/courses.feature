@@ -14,3 +14,7 @@ Feature: Courses
 		And "CS130" is required.
 		And "CS220" is required.
 		And "CS230" is required.
+
+	Scenario: Given the student name and return the classes that student need to retake.
+		Given the student name "Aldo Anaya".
+		Then the student need to retake "CS120".

@@ -11,8 +11,10 @@ class Test {
 		List<String> someList1 = new ArrayList<String>(csvParser.parsePreReq("\"CS374\""));
 		//List<String> someList1 = new ArrayList<String>(csvParser.parseClass("CS374"));
 		//List<String> someList1 = new ArrayList<String>(csvParser.parseStudent("Aldo Anaya"));
-
+			
 		//System.out.println(someList);
-		System.out.println(someList1.get(1));
+		System.out.println(someList1);
+	
+
 	}
 }

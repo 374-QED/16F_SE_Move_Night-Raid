@@ -104,7 +104,7 @@ public class CSVparser {
                 // use comma as separator
                 String hold = "";
                 String[] data = line.split(",");
-                if(data[0].equals(preq)) 
+                if(data[0].replace("\"", "").equals(preq)) 
                     hold = data[1].replace("\"", "");
                     hold = hold.replaceAll("^\"|\"$", "");
                     list.add(hold);
