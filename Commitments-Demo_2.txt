@@ -1,0 +1,6 @@
+Demo_2 - Commitments for wednesday (9/28)
+
+Given a course:
+
+1. Be able to find the number of people who are registered for the course
+2. Be able to find students name
