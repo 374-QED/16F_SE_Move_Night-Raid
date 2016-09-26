@@ -1,5 +1,15 @@
 Demo_2 - Commitments for wednesday (9/28)
 
+Figure out the most important methods in the CSV
+	- Term
+	- Subject Number
+	- Course Number
+	- Reg STS Code
+	- Grade Code
+	- Banner ID
+	- First Name
+	- Last Name
+
 Given a course:
 
 1. Be able to find the number of people who are registered for the course
