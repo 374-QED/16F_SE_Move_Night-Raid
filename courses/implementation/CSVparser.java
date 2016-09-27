@@ -11,7 +11,7 @@ public class CSVparser {
 
 	public List<String> parseClass(String course) {
 		
-		String csvFile = new File("resources\\courses.csv").getAbsolutePath();
+		String csvFile = new File("resources\\cs374_anon.csv").getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		List<String> list = new ArrayList<String>();
@@ -24,10 +24,9 @@ public class CSVparser {
                 // use comma as separator
                 String[] data = line.split(",");
 
-                if(data[2].replace("\"", "").equals(course)) {
-                	hold = data[1].replace("\"", "");
-                    hold = hold.replaceAll("^\"|\"$", "");
-                    list.add(hold);
+                if((data[40]+data[42]).equals(course)) {
+                	
+                    list.add(data[58]+" "+data[59]);
                 }
             }
 

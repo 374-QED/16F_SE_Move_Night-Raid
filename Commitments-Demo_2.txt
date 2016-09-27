@@ -1,6 +1,6 @@
 Demo_2 - Commitments for wednesday (9/28)
 
-Figure out the most important methods in the CSV
+Figure out the most important data(columns) in the CSV
 	- Term
 	- Subject Number
 	- Course Number
@@ -9,6 +9,15 @@ Figure out the most important methods in the CSV
 	- Banner ID
 	- First Name
 	- Last Name
+
+
+
+Find the prerquisites for each distinct class
+
+
+
+
+
 
 Given a course:
 
