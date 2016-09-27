@@ -165,6 +165,51 @@ public class CSVparser {
             return list;
         }
     }
+     public List<String> parseUnique(int x, int y) {
+    //  // Will parse the csv file, using the "class" argument
+    //  // to get an array of strings that contains the prerequisites
+    //  // of the class
+    String csvFile = new File("resources\\course_name.csv").getAbsolutePath();
+        BufferedReader br = null;
+        String line = "";
+        List<String> list = new ArrayList<String>();
+
+        try {
+
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String course = "";
+                String coursenum = "";
+                String com = "";
+                String[] data = line.split(",");
+                course = data[x];
+                coursenum = data[y];
+                course = course.replaceAll("^\"|\"$", "");
+                coursenum = coursenum.replaceAll("^\"|\"$", "");
+                com = course+coursenum;
+                if(list.contains(com) == false)
+                    list.add(com);
+
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return list;
+        }
+    }
 
 	
 }
