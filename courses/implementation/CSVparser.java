@@ -47,7 +47,7 @@ public class CSVparser {
 	// 	// Will parse the csv file, using the "studentID" argument
 	// 	// to get an array of strings that contains the classes
 	// 	// taken by this student
-        String csvFile = new File("resources\\courses.csv").getAbsolutePath();
+        String csvFile = new File("resources\\course_name.csv").getAbsolutePath();
         BufferedReader br = null;
         String line = "";
         List<String> list = new ArrayList<String>();
@@ -59,11 +59,8 @@ public class CSVparser {
                 String hold = "";
                 // use comma as separator
                 String[] data = line.split(",");
-                if(data[1].replace("\"", "").equals(studentName)) {
-                    hold = data[2].replace("\"", "");
-                    hold = hold.replaceAll("^\"|\"$", "");
-                    list.add(hold);
-                }
+                if((data[2]+ " " + data[4]+ " " + data[3]).equals(studentName))
+                	list.add(data[5]+data[6]);
             }
             list.remove(0);
 
