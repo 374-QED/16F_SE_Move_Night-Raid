@@ -1,0 +1,10 @@
+Glossary:
+parseClass - given course name and semester,
+		it will print out all student that in that course and semester
+parseStudent - Given student,
+		it will print all the class that they have taken
+parsePreReq - Given course name,
+		it will print all prerequisites courses.
+parseSemester - Given semester,
+		it will print all class within that semester
+parseUnique - it will find all the distinct classes
