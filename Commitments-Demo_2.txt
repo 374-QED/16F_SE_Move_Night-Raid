@@ -10,7 +10,7 @@ Figure out the most important data(columns) in the CSV
 	- First Name
 	- Last Name
 
-
+add more scenario
 
 Find the prerquisites for each distinct class
 
