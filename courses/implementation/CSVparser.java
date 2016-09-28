@@ -9,9 +9,9 @@ import java.util.*;
 
 public class CSVparser {
 
-	public List<String> parseClass(String course) {
+	public List<String> parseClass(String course, String semester) {
 		
-		String csvFile = new File("resources\\cs374_anon.csv").getAbsolutePath();
+		String csvFile = new File("resources\\course_name.csv").getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		List<String> list = new ArrayList<String>();
@@ -20,14 +20,11 @@ public class CSVparser {
 
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
-                String hold = "";
                 // use comma as separator
                 String[] data = line.split(",");
-
-                if((data[40]+data[42]).equals(course)) {
-                	
-                    list.add(data[58]+" "+data[59]);
-                }
+                if((data[5]+data[6]).equals(course) && data[0].equals(semester))
+                	list.add(data[2]+ " " + data[4]+ " " + data[3]);
+        
             }
 
         } catch (FileNotFoundException e) {
