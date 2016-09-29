@@ -11,7 +11,7 @@ public class CSVparser {
 
 	public List<String> parseClass(String course, String semester) {
 		
-		String csvFile = new File("resources\\course_name.csv").getAbsolutePath();
+		String csvFile = new File("resources\\cs374_anon.csv").getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		List<String> list = new ArrayList<String>();
@@ -22,8 +22,8 @@ public class CSVparser {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] data = line.split(",");
-                if((data[5]+data[6]).equals(course) && data[0].equals(semester))
-                	list.add(data[2]+ " " + data[4]+ " " + data[3]);
+                if((data[40]+data[42]).equals(course) && data[1].equals(semester))
+                	list.add(data[58]+ " " + data[60]+ " " + data[59]);
         
             }
 
@@ -47,7 +47,7 @@ public class CSVparser {
 	// 	// Will parse the csv file, using the "studentID" argument
 	// 	// to get an array of strings that contains the classes
 	// 	// taken by this student
-        String csvFile = new File("resources\\course_name.csv").getAbsolutePath();
+        String csvFile = new File("resources\\cs374_anon.csv").getAbsolutePath();
         BufferedReader br = null;
         String line = "";
         List<String> list = new ArrayList<String>();
@@ -59,10 +59,10 @@ public class CSVparser {
                 String hold = "";
                 // use comma as separator
                 String[] data = line.split(",");
-                if((data[2]+ " " + data[4]+ " " + data[3]).equals(studentName))
-                	list.add(data[5]+data[6]);
+                if((data[58]+ " " + data[60]+ " " + data[59]).equals(studentName))
+                	list.add(data[40]+data[42]);
             }
-            list.remove(0);
+            //list.remove(0);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
