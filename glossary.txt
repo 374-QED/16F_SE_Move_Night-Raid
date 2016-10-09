@@ -8,3 +8,16 @@ parsePreReq - Given course name,
 parseSemester - Given semester,
 		it will print all class within that semester
 parseUnique - it will find all the distinct classes
+
+
+Classes
+	- BufferedReader
+		+ a class with methods that allow it to read certain areas of a file
+	- FileReader
+		+ a class that gets the location of the file specified
+	- List
+		+ an interface for a data structure that contains a set of elements
+	- ArrayList
+		+ a class that inherits from List where a set of elements are contained
+	- FileNotFoundException
+		+ returns a file not found error code for better understanding

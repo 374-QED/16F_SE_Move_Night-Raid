@@ -2,29 +2,30 @@ package implementation;
 
 import java.io.*;
 import java.util.*;
+import java.sql.*;
 
 class Test {
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
-		CSVparser csvParser = new CSVparser();
-		String course = "ACCT324";
-		String semester = "201320";
-		String student_name = "Ivan Mary Rico";
+		// CSVparser csvParser = new CSVparser();
+		// String course = "ACCT324";
+		// String semester = "201320";
+		// String student_name = "Ivan Mary Rico";
 
-		List<String> someList1 = new ArrayList<String>(csvParser.parseUnique(5,6));
-		List<String> someList2 = new ArrayList<String>(csvParser.parseClass(course,semester));
-		List<String> someList3 = new ArrayList<String>(csvParser.parseStudent(student_name));
+		// List<String> someList1 = new ArrayList<String>(csvParser.parseUnique(5,6));
+		// List<String> someList2 = new ArrayList<String>(csvParser.parseClass(course,semester));
+		// List<String> someList3 = new ArrayList<String>(csvParser.parseStudent(student_name));
 
-		System.out.println(student_name + " took:\n");
-		for(int i = 0; i < someList3.size();i++)
-			System.out.println(someList3.get(i));
+		// System.out.println(student_name + " took:\n");
+		// for(int i = 0; i < someList3.size();i++)
+		// 	System.out.println(someList3.get(i));
 	
-		System.out.println("\n");
+		// System.out.println("\n");
 		
-		System.out.println("Find " + course + " with " + semester + ":\n");
-		for(int i = 0; i < someList2.size();i++)
-			System.out.println(someList2.get(i));
+		// System.out.println("Find " + course + " with " + semester + ":\n");
+		// for(int i = 0; i < someList2.size();i++)
+		// 	System.out.println(someList2.get(i));
 	
 		
 		/*
@@ -33,6 +34,12 @@ class Test {
 			System.out.println(someList1.get(i));
 		System.out.println(someList1.size());
 		*/
+
+
+		MySQLAccess test = new MySQLAccess();
+
+		test.readDatabase("Select * from cs374_anon limit 10");
+
 	}
 
 }

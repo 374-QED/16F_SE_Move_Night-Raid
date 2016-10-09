@@ -14,6 +14,12 @@ add more scenario
 
 Find the prerquisites for each distinct class
 
+Fixed parseStudent method to return the classes that the given student has taken from the given csv
+
+Updated parseClass method to return the students that have taken a given class at a given semester.
+
+add glossary
+
 
 Given a class and semester:
 1. Be able to out put the students.

@@ -1,5 +1,3 @@
 @echo off
-cd implementation
-javac Test.java CSVparser.java
-cd ..
-java -cp . implementation.Test
+javac -cp "jars/*;." implementation/Test.java implementation/MySQLAccess.java
+java -cp ".;jars/*" implementation.Test
