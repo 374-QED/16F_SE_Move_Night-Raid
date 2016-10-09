@@ -205,5 +205,19 @@ public class CSVparser {
         }
     }
 
+
+/**********************************************************************/
+/**********************************************************************/
+// Darius work on this
+/**********************************************************************/
+/**********************************************************************/
+    public Map<String, ArrayList> select(String... columns) {        // argument should contain the column names of
+                                                                    // what the map should return
+        Map<String, ArrayList> map = new HashMap<String, ArrayList>();
+
+        //  Do your stuff here
+
+        return map;
+    }
 	
 }
