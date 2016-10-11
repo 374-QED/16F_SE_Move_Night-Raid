@@ -29,7 +29,7 @@ public class CoursesTest {
 	public void theStudentNeedToRetake(String course) throws Throwable
 	{
 		students = csvParser.parseStudent(holding);
-		//assertEquals(students.contains(course),true);
+		assertEquals(students.contains(course),false);
 	}
 
 	@Then("^\"([^\"]*)\" is required\\.$")
@@ -47,7 +47,7 @@ public class CoursesTest {
 	@Then("^\"([^\"]*)\" is suppose to be in that course\\.$")
 	public void isNotSupposeToBeInThatCourse(String arg1) throws Throwable {
 		students = csvParser.parseClass(holding,holding);
-	   //assertEquals(students.contains(arg1), true);
+	   assertEquals(students.contains(arg1), true);
 	
 	}
 

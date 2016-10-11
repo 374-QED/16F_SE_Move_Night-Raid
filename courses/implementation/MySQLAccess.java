@@ -25,7 +25,7 @@ public class MySQLAccess {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// Setup connection with database    getConnection("database", "username", "password")
-			connect = DriverManager.getConnection("jdbc:mysql://localhost/cs374?autoReconnect=true&useSSL=false", "root", "123southkid23");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/cs374?autoReconnect=true&useSSL=false", "root", "Wildcat87!");
 
 			// Statements allow to issue SQL queries to the database
 	        statement = connect.createStatement();
@@ -35,31 +35,6 @@ public class MySQLAccess {
 
 	        //writeResultSet(resultSet);
 	        writeMetaData(resultSet);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			close();
-		}
-	}
-
-
-	public List<String> readDatabase(String query) throws Exception {
-
-		try {	
-
-			// This will load the MySQL driver, each DB has its own driver
-			Class.forName("com.mysql.jdbc.Driver");
-
-			// Setup connection with database    getConnection("database", "username", "password")
-			connect = DriverManager.getConnection("jdbc:mysql://localhost/cs374?autoReconnect=true&useSSL=false", "root", "123southkid23");
-
-			// Statements allow to issue SQL queries to the database
-	        statement = connect.createStatement();
-
-	        // Result set get the result of the SQL query
-	        resultSet = statement.executeQuery(query);
-
-	        
 		} catch (Exception e) {
 			throw e;
 		} finally {
