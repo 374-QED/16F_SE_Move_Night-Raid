@@ -60,4 +60,52 @@ public class AccessSQL_CSV {
 		id  = test.writeResultSet(student_id,"Banner_id");
 		return id.get(0);
 	}
+	public static void print(String course, String semester) throws SQLException
+	{
+		List<String> student;
+		List<String> aldo;
+		List<String> com = new ArrayList<String>();
+		student = getStudent(semester, course);
+		aldo = takeOutStudent(student, course);
+		System.out.println(" ");
+		for(int x = 0; x < student.size();x++)
+		{
+			if(aldo.contains(student.get(x)) == false)
+				com.add(student.get(x));
+		}
+		if(aldo.isEmpty() && !student.isEmpty())
+		{
+			System.out.println("These student can take '" + course +"':");
+			for(int x = 0; x < student.size();x++)
+			{
+				System.out.println("Name: "+findStudent(student.get(x))+"    Banner_id: " + student.get(x));
+			}
+		}
+		else if(com.isEmpty()&&aldo.isEmpty()&&student.isEmpty())
+		{
+			System.out.println("No course called '" + course + "' exist or semester '"+semester+"'.");
+		}
+		else if(com.isEmpty())
+		{
+			System.out.println("These student can't take "+course+"': ");
+			for(int x = 0; x < aldo.size();x++)
+			{
+				System.out.println(findStudent("Name: "+aldo.get(x))+"    Banner_id: " + aldo.get(x));
+			}
+		}
+		else
+		{
+			System.out.println("These student can take '" + course +"':");
+			for(int x = 0; x < com.size();x++)
+			{
+				System.out.println(findStudent("Name: "+com.get(x))+"    Banner_id: " + com.get(x));
+			}
+			System.out.println(" ");
+			System.out.println("These student can't take "+course+"': ");
+			for(int x = 0; x < aldo.size();x++)
+			{
+				System.out.println(findStudent("Name: "+aldo.get(x)) +"    Banner_id: " + aldo.get(x));
+			}
+		}
+	}
 }	

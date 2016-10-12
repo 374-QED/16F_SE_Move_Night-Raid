@@ -1,8 +1,8 @@
 Feature: Testing
 
 Scenario Outline: Given course and term find the student
-    Given the course "BHEB472" and "201320".
-    Then <name> had taken that course already.
+    Given the course "BHEB472" and the term "201320".
+    Then <name> will take this course.
 Examples: 
 | name |
 |"Archie John Murray"|
@@ -12,7 +12,7 @@ Examples:
 |"Randy Serena Hashimoto"|
 
 Scenario Outline: Given course and term find the student
-    Given the course "ACCT324" and "201320".
+    Given the course "ACCT324" and the term "201320".
     Then <name> had taken that course already.
 Examples: 
 | name |
@@ -31,7 +31,7 @@ Examples:
 |"David Randy Wideman"|
 
 Scenario Outline: Given course and term find the student
-    Given the course "ART106" and "201320".
+    Given the course "ART106" and the term "201320".
     Then <name> had taken that course already.
 Examples:
 | name |
@@ -42,3 +42,16 @@ Examples:
 |"Eloise Tamara Stout"|
 |"Oscar Doris Spencer"|
 |"Jeremy Tara Santiago"|
+
+
+Scenario Outline: Gives names of students that should not be in the course
+	Given the course "BHEB472" and the term "201320".
+	Then <name> should not be in the course.
+
+Examples: 
+| name |
+|"Archie John Murray"|
+|"Alice David Finan"|
+|"Amy Patrick Cahoon"|
+|"Horace Louis Evans"|
+|"Randy Serena Hashimoto"|
