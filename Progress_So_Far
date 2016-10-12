@@ -1,7 +1,5 @@
-Progress (9/26):
+Progress (10/12):
 
-We feel our team is 25 percent done overall.
+We feel our team is 90-100 percent done overall.
 
-We have working functions and a decent feature file.
-
-We now have to update our java files to be albe to read the csv file and report the need infromation for testing.
+We have uploaded all data to a database, We have updated our files for cucumber to functionally test our featues.
