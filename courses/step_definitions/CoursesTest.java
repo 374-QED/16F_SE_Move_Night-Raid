@@ -20,7 +20,6 @@ public class CoursesTest {
 	 	student = lookup.getStudent(semester,course);
 	 	class_ = course;
 	}
-
 	@Then("^\"([^\"]*)\" had taken that course already\\.$")
 	public void hadThatCourseAlready(String name) throws Throwable {
 	    // Write code here that turns the phrase above into concrete action
@@ -29,6 +28,7 @@ public class CoursesTest {
 		result = lookup.findStudent(splited[0],splited[1],splited[2]);
 	    assertEquals(student.contains(result),true);
 	}
+
 	@Then("^\"([^\"]*)\" will take this course\\.$")
 	public void CourseAlready(String name) throws Throwable {
 	    // Write code here that turns the phrase above into concrete action
@@ -37,11 +37,9 @@ public class CoursesTest {
 		result = lookup.findStudent(splited[0],splited[1],splited[2]);
 	    assertEquals(student.contains(result),true);
 	}
-
 	@Then("^\"([^\"]*)\" should not be in the course\\.$")
 	public void shouldNotBeInTheCourse(String name) throws Throwable {
 	    unnStudent = lookup.takeOutStudent(student, class_);
-
 	    String[] splited = name.split("\\s+");
 		result = lookup.findStudent(splited[0],splited[1],splited[2]);
 	    assertEquals(unnStudent.contains(result), true);

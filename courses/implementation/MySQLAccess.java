@@ -14,8 +14,6 @@ public class MySQLAccess {
 
 
 	private CSVparser csvParser = new CSVparser();
-
-
 	public ResultSet readDatabase(String query) throws SQLException {
 		Connection connect = null;
 		Statement statement = null;
@@ -28,14 +26,11 @@ public class MySQLAccess {
 
 			// Setup connection with database    getConnection("database", "username", "password")
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/cs374?autoReconnect=true&useSSL=false", "root", "123southkid23");
-
 			// Statements allow to issue SQL queries to the database
 	        statement = connect.createStatement();
 
 	        // Result set get the result of the SQL query
 	        resultSet = statement.executeQuery(query);
-
-	        
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -53,6 +48,7 @@ public class MySQLAccess {
 		resultSet = readDatabase("select Banner_id from cs374_anon where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_number = '"+parts[1]+"'");
 		return writeResultSet(resultSet, word);
 	}
+
 
 
 	public void writeMetaData(ResultSet resultSet) throws SQLException {
