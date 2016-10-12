@@ -8,43 +8,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import com.mysql.jdbc.Driver;
 
+import java.util.*;
 
 public class MySQLAccess {
 
-	private Connection connect = null;
-	private Statement statement = null;
-	private PreparedStatement preparedStatement = null;
-	private ResultSet resultSet = null;
+
+	private CSVparser csvParser = new CSVparser();
 
 
-	public void readDatabase(String query) throws Exception {
-
-		try {	
-
-			// This will load the MySQL driver, each DB has its own driver
-			Class.forName("com.mysql.jdbc.Driver");
-
-			// Setup connection with database    getConnection("database", "username", "password")
-			connect = DriverManager.getConnection("jdbc:mysql://localhost/cs374?autoReconnect=true&useSSL=false", "root", "123southkid23");
-
-			// Statements allow to issue SQL queries to the database
-	        statement = connect.createStatement();
-
-	        // Result set get the result of the SQL query
-	        resultSet = statement.executeQuery(query);
-
-	        //writeResultSet(resultSet);
-	        writeMetaData(resultSet);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			close();
-		}
-	}
-
-
-	public List<String> readDatabase(String query) throws Exception {
-
+	public ResultSet readDatabase(String query) throws SQLException {
+		Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		try {	
 
 			// This will load the MySQL driver, each DB has its own driver
@@ -63,13 +39,23 @@ public class MySQLAccess {
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			close();
+			return resultSet;
 		}
 	}
 
+	public List<String> getStudents(String semester, String course) throws SQLException {
+		Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String word = "Banner_id";
+		String[] parts = csvParser.parseCourse(course);
+		resultSet = readDatabase("select Banner_id from cs374_anon where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_number = '"+parts[1]+"'");
+		return writeResultSet(resultSet, word);
+	}
 
 
-	private void writeMetaData(ResultSet resultSet) throws SQLException {
+	public void writeMetaData(ResultSet resultSet) throws SQLException {
         // Now get some metadata from the database
         // Result set get the result of the SQL query
 
@@ -81,18 +67,29 @@ public class MySQLAccess {
         }
     }
 
-    private void writeResultSet(ResultSet resultSet) throws SQLException {
+    public List<String> writeResultSet(ResultSet resultSet, String column_set) throws SQLException {
         // ResultSet is initially before the first data set
+        //System.out.println("Hello");
+        List<String> item = new ArrayList<String>();
+
         while (resultSet.next()) {
             
-            String firstName = resultSet.getString("First_name");
-            
-            System.out.println("First Name: " + firstName);
+            item.add(resultSet.getString(column_set));
+            //System.out.println(column_set + ": " + firstName);
         }
+        return item;
+    }
+
+    public String writeString(ResultSet resultSet, String column_set) throws SQLException {
+            return resultSet.getString(column_set);
     }
 
     // You need to close the resultSet
     private void close() {
+    	Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
         try {
                 if (resultSet != null) {
                         resultSet.close();
