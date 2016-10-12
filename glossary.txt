@@ -21,3 +21,5 @@ Classes
 		+ a class that inherits from List where a set of elements are contained
 	- FileNotFoundException
 		+ returns a file not found error code for better understanding
+	- MySQLAccess
+		+ a class with meathods that allow interation with the sql database
