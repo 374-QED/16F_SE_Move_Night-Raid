@@ -6,7 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import com.mysql.jdbc.Driver;
+//import com.mysql.jdbc.Driver;
+import org.sqlite.*;
 
 import java.util.*;
 
@@ -14,7 +15,8 @@ public class MySQLAccess {
 
 
 	private CSVparser csvParser = new CSVparser();
-	public ResultSet readDatabase(String query) throws SQLException {
+
+	public ResultSet readDatabase(String query) {
 		Connection connect = null;
 		Statement statement = null;
 		PreparedStatement preparedStatement = null;
@@ -22,17 +24,21 @@ public class MySQLAccess {
 		try {	
 
 			// This will load the MySQL driver, each DB has its own driver
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.sqlite.JDBC");
 
 			// Setup connection with database    getConnection("database", "username", "password")
-			connect = DriverManager.getConnection("jdbc:mysql://localhost/cs374?autoReconnect=true&useSSL=false", "root", "123southkid23");
+			connect = DriverManager.getConnection("jdbc:sqlite:resources/SQLite/courses.db");
 			// Statements allow to issue SQL queries to the database
 	        statement = connect.createStatement();
 
 	        // Result set get the result of the SQL query
 	        resultSet = statement.executeQuery(query);
+
+
+
+
 		} catch (Exception e) {
-			throw e;
+			e.printStackTrace();
 		} finally {
 			return resultSet;
 		}

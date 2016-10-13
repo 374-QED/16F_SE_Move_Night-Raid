@@ -1,5 +1,5 @@
 package implementation;
-import java.util.Scanner;
+
 import java.io.*;
 import java.util.*;
 import java.sql.*;
@@ -17,6 +17,8 @@ class Test {
 		System.out.println("Enter semester: ");
 		semester = user_input.next();
 		test.print(course,semester);
+
+		
 	}	
 
 }

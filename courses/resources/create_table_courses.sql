@@ -1,8 +1,9 @@
-<<<<<<< HEAD
-\\in mysql commandline
-\\change my.ini at secure_priv_file to secure_priv_file = "" run notepad at admin and find my.ini in C:\ProgramData\MySQL\...
-\\make sure reset the database in order for it to change the setting
-\\insert course_name.csv into cs374 database folder in MySQL
+
+--in mysql commandline
+--change my.ini at secure_priv_file to secure_priv_file = "" run notepad at admin and find my.ini in C:\ProgramData\MySQL\...
+--make sure reset the database in order for it to change the setting
+--insert course_name.csv into cs374 database folder in MySQL
+
 create database cs374;
 use cs374;
 create table cs374_anon (
@@ -18,6 +19,3 @@ Reg_STS_Code varchar(10),
 Grade_Code varchar(2));
 
 load data infile 'course_name.csv' into table cs374_anon columns terminated by ',' optionally enclosed by '"' escaped by '"' lines terminated by '\r\n' ignore 1 lines;
-=======
- 
->>>>>>> c0d40e569af50245f8aafc678a98f9cf5f35230e

@@ -87,10 +87,10 @@ public class AccessSQL_CSV {
 		}
 		else if(com.isEmpty())
 		{
-			System.out.println("These student can't take "+course+"': ");
+			System.out.println("These student can't take "+course+"':");
 			for(int x = 0; x < aldo.size();x++)
 			{
-				System.out.println(findStudent("Name: "+aldo.get(x))+"    Banner_id: " + aldo.get(x));
+				System.out.println("Name: "+findStudent(aldo.get(x))+"    Banner_id: " + aldo.get(x));
 			}
 		}
 		else

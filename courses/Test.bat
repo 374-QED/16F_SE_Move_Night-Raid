@@ -1,4 +1,4 @@
 @echo off
 
-javac -cp "jars/*;." implementation/Test.java implementation/MySQLAccess.java
+javac -cp "jars/*;.;resources/SQLite/*" implementation/Test.java implementation/MySQLAccess.java
 java -cp ".;jars/*" implementation.Test
