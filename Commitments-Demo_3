@@ -1,0 +1,8 @@
+Commitments For Wednesday (10/12):
+
+1. Uplaod all data to mysql
+2. Updated code to fit Cross Platform Implementation.
+3. Update Feature and Implementation files to fit SQL implementation
+	3-1. New MYSQLACCESS.java file to import/Access data to Mysql.
+	3-2. New AccessSQL_CSV.java file to allow the user to acces MYSQL without needing to Pre-install software.
+4. Full funtinally of base requirements

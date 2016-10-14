@@ -1,6 +1,0 @@
-Commitments For Wednesday (10/12):
-
-1. Uplaod all data to mysql
-2. Update Feature and Implementation files to fit SQL implementation
-	2-1. New MYSQLACCESS.java file to import/Access data to Mysql.
-	2-2.
