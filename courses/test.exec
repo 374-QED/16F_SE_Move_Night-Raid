@@ -1,3 +1,0 @@
-
-javac -cp "jars/*;.;resources/SQLite/*" implementation/Test.java implementation/MySQLAccess.java
-java -cp ".;jars/*" implementation.Test
