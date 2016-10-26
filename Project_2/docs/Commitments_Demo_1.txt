@@ -1,0 +1,9 @@
+1. Create and organize a structure for Project 2
+
+2. Come up with a name for the project
+
+3. Create a csv with the required fields for figuring out the logic
+
+4. Count the seat number for each room in the 2nd floor of Coba
+
+5. Figure out what to do with our lives.
