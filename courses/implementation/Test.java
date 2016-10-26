@@ -8,6 +8,7 @@ class Test {
 
 	public static void main(String[] args) throws Exception
 	{
+		/*
 		String course;
 		String semester;
 		AccessSQL_CSV test = new AccessSQL_CSV();
@@ -22,7 +23,14 @@ class Test {
 		System.out.println("Enter a semester (such as '201320'): ");
 		semester = user_input.next();
 		test.print(course,semester);
-
+		*/
+		for(int x = 0; x < 10; x++)
+		{
+			if(x % 2 == 0)
+				System.out.println("Hello, World");
+			else
+				System.out.println("Hello, Universe");
+		}
 		
 	}	
 
