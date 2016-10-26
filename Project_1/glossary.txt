@@ -22,4 +22,8 @@ Classes
 	- FileNotFoundException
 		+ returns a file not found error code for better understanding
 	- MySQLAccess
-		+ a class with meathods that allow interation with the sql database
+		+ a class with meathods that allows interation with the sql database
+	- CSVParser
+		+ a class used to parse CSVs
+	- AccessSQL_CSV
+		+ a class where MyAccessSQL and CSVparser are used in conjunction to get lists
