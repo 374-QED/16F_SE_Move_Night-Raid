@@ -27,7 +27,7 @@ public class CSVparser {
 	// 	// Will parse the csv file, using the "class" argument
 	// 	// to get an array of strings that contains the prerequisites
 	// 	// of the class
-    String csvFile = new File("resources\\prereq.csv").getAbsolutePath();
+    String csvFile = new File("resources/prereq.csv").getAbsolutePath();
         BufferedReader br = null;
         String line = "";
         List<String> list = new ArrayList<String>();
