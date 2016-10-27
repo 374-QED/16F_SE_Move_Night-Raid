@@ -98,13 +98,13 @@ public class AccessSQL_CSV {
 			System.out.println("These student can take '" + course +"':");
 			for(int x = 0; x < com.size();x++)
 			{
-				System.out.println(findStudent("Name: "+com.get(x))+"    Banner_id: " + com.get(x));
+				System.out.println("Name: "+findStudent(com.get(x))+"    Banner_id: " + com.get(x));
 			}
 			System.out.println(" ");
 			System.out.println("These student can't take "+course+"': ");
 			for(int x = 0; x < aldo.size();x++)
 			{
-				System.out.println(findStudent("Name: "+aldo.get(x)) +"    Banner_id: " + aldo.get(x));
+				System.out.println("Name: "+findStudent(aldo.get(x)) +"    Banner_id: " + aldo.get(x));
 			}
 		}
 	}
