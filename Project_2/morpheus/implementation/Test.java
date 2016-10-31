@@ -10,11 +10,9 @@ class Test {
 
 		public static void main(String[] args) 
 		{
-			String course = "CS374";
+			String course = "CS315";
 			CSVparser csvParser = new CSVparser();
 			List<String> student = new ArrayList<String>(csvParser.parsePreReq(course));
 			System.out.println(student);
 		}
-
-
 }
