@@ -5,9 +5,15 @@ import static org.junit.Assert.*;
 
 public class Morpheus_steps {
 
+	@Before public void setUp() {
+
+		CSV_parser parser = new CSV_parser();
+	}
+
 	@Given("^the days \"([^\"]*)\" and the course \"([^\"]*)\"$")
 	public void theDaysAndTheCourse(String arg1, String arg2) throws Throwable {
 	
+		
 	}
 
 	@Then("^the course can be moved to \"([^\"]*)\"$")
