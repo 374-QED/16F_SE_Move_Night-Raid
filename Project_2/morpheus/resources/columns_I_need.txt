@@ -1,0 +1,19 @@
+Pidm
+Term Code
+Subject Code
+Course Number
+Banner id
+First Name
+Middle Name
+Last Name
+Begin Time 1
+End Time1
+Bldg Code
+Room Code
+Monday Ind1
+Tuesday Ind1
+Wednesday Ind1
+Thursday Ind1
+Friday Ind1
+Saturday Ind1
+Sunday Ind1
