@@ -14,8 +14,6 @@ import java.util.*;
 public class SQLiteAccess {
 
 
-	private CSVparser csvParser = new CSVparser();
-
 	public ResultSet readDatabase(String query){
 
 		Connection connect = null;
@@ -45,7 +43,13 @@ public class SQLiteAccess {
 		}
 	}
 
-	public List<String> getStudents(String semester, String course) throws SQLException {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                           Needs Work On
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+	public List<String> getStudentsFromClass(String course) throws SQLException {
 		Connection connect = null;
 		Statement statement = null;
 		PreparedStatement preparedStatement = null;
@@ -55,6 +59,15 @@ public class SQLiteAccess {
 		resultSet = readDatabase("select Banner_id from classes where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_number = '"+parts[1]+"'");
 		return writeResultSet(resultSet, word);
 	}
+
+
+    public String getLatestSemester() throws SQLException {
+        // return the latest semester
+    }
+
+    public List<String> getClassFromTime(String days, String time) throws SQLException {
+        // return the classes that have this time
+    }
 
 
 
