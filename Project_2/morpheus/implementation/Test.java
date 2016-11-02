@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 class Test {
 
-		private static CSVparser csvParser = new CSVparser();
 
 // <<<<<<< HEAD
 // 		public static void main(String[] args) throws Exception 
@@ -37,12 +36,14 @@ class Test {
 		public static void main(String[] args) throws SQLException {
 			
 			SQLiteAccess sqlite = new SQLiteAccess();
+			nrLib cool = new nrLib();
 
 			List<String> list1 = new ArrayList<String>();
 			List<String> list2 = new ArrayList<String>();
 			List<String> list3 = new ArrayList<String>();
 			List<String> list4 = new ArrayList<String>();
 			List<String> list5 = new ArrayList<String>();
+			List<String> list6 = new ArrayList<String>();
 			Scanner user_input = new Scanner(System.in);
 
 			String course;
@@ -68,24 +69,33 @@ class Test {
 			ResultSet resultSet2 = sqlite.readDatabase("select distinct subject_code from classes");
 			list2 = sqlite.writeResultSet(resultSet2, "Subject_Code");
 			System.out.println("Available Subjects: ");
-			System.out.println(list2);
+			for(int i = 0; i < list2.size(); i++)
+			{
+				System.out.println(list2.get(i));
+			}
 			System.out.println("");
 			System.out.println("Enter a course (such as 'CS120'): ");
 			course = user_input.next();
 			System.out.println("");
 
-			String[] parts = csvParser.parseCourse(course);
+			String[] parts = sqlite.parseCourse(course);
 
 			ResultSet resultSet3 = sqlite.readDatabase("select begin_time from classes where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' order by begin_time asc");
 			list3 = sqlite.writeResultSet(resultSet3, "Begin_Time");
 			ResultSet resultSet4 = sqlite.readDatabase("select Room_Code1 from classes where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' order by begin_time asc");
 			list4 = sqlite.writeResultSet(resultSet4, "Room_Code1");
 			System.out.println("Available Class Times and Rooms: ");
-			System.out.println("");
+			
 			for(int i = 0; i < list3.size(); i++)
 			{
-				System.out.println(list3.get(i) + " " + list4.get(i));
+				if(list6.contains(list3.get(i) + " " + list4.get(i)) == false)
+					list6.add(list3.get(i) + " " + list4.get(i));
 			}
+			for(int i = 0; i < list6.size(); i++)
+			{
+				System.out.println(list6.get(i));
+			}
+			System.out.println("");
 			System.out.println("Enter a Class Time (I.E. '800'): ");
 			begin_time = user_input.next();
 			System.out.println("");
@@ -96,7 +106,11 @@ class Test {
 
 			ResultSet resultSet5 = sqlite.readDatabase("select * from classes where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' and begin_time = '"+begin_time+"' and room_code1 = '"+room_code1+"'");
 			list5 = sqlite.writeResultSet(resultSet5, "Banner_ID");
-			System.out.println(list5);
+			for(int x = 0; x < list5.size();x++)
+ 			{
+ 				System.out.println(cool.findStudent(list5.get(x)));		
+ 			}
+			//System.out.println(list5);
 
 		}
 
