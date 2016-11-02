@@ -3,3 +3,5 @@ Commitments_for_Demo #2:
 1. Make woring testable code
 2. Talk more with client
 3. Be able to test classes and max seating
+4. Adding more functionality
+5. Scenario
