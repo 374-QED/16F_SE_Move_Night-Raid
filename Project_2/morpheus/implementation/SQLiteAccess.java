@@ -13,7 +13,20 @@ import java.util.*;
 
 public class SQLiteAccess {
 
-
+	public String[] parseCourse(String name)
+    {
+        int t = 0;
+        for(int x = 0; x < name.length();x++)
+        {
+            int hold = name.charAt(x);
+            if(hold >= 48 && hold <= 58 && t==0)
+            {
+                t = x;
+            }
+        }
+        String[] parts = {name.substring(0,t),name.substring(t)};
+        return parts;
+    }
 	public ResultSet readDatabase(String query){
 
 		Connection connect = null;
@@ -55,18 +68,30 @@ public class SQLiteAccess {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		String word = "Banner_id";
-		String[] parts = csvParser.parseCourse(course);
-		resultSet = readDatabase("select Banner_id from classes where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_number = '"+parts[1]+"'");
+		String[] parts = parseCourse(course);
+		resultSet = readDatabase("select Banner_id from classes where Term_Code = '"+getLatestSemester()+"' and Subject_Code = '"+parts[0]+"' and Course_number = '"+parts[1]+"'");
 		return writeResultSet(resultSet, word);
 	}
 
 
     public String getLatestSemester() throws SQLException {
         // return the latest semester
+        Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+        resultSet = readDatabase("select distinct Term_Code from classes order by Term_Code desc");
+        return writeString(resultSet,"Term_Code");
     }
-
+ 
     public List<String> getClassFromTime(String days, String time) throws SQLException {
         // return the classes that have this time
+         Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		//resultSet = readDatabase("select Subject_Code, Course_number from classes where ")
+
     }
 
 
