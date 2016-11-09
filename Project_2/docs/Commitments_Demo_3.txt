@@ -1,1 +1,9 @@
--- Move the new Database to the 
+-- Move the new csv into the database
+
+-- Be able to collect the distinct begin times of student's classes from certain days
+
+-- Start work on the user interface for the client
+
+-- Refactor code to make it more manageable and easier to understand
+
+-- Create a Cucumber vs JUnit doc
