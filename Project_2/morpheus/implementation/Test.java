@@ -35,13 +35,12 @@ class Test {
 // =======
 		public static void main(String[] args) throws SQLException {
 			
-			
 			SQLiteAccess sqlite = new SQLiteAccess();
 			nrLib cool = new nrLib();
+
 			
-			System.out.println(cool.findTime("MKTG320","MWF"));
+			//System.out.println(cool.findTime("MKTG320","MWF"));
 			
-			/*
 			List<String> list1 = new ArrayList<String>();
 			List<String> list2 = new ArrayList<String>();
 			List<String> list3 = new ArrayList<String>();
@@ -115,7 +114,7 @@ class Test {
  				System.out.println(cool.findStudent(list5.get(x)));		
  			}
 			//System.out.println(list5);
-			*/
-		}
+			
+	}
 
 }
