@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.sql.*;
 
-public class nrLib {
+public class NRLib {
 	private static SQLiteAccess test = new SQLiteAccess();
 
 	public static String findStudent(String student_id) throws SQLException
