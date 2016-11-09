@@ -11,7 +11,7 @@ class ClassMove {
 	public static void main(String [] args) throws SQLException{
 
 		SQLiteAccess sqlite = new SQLiteAccess();
-
+		nrLib awesome = new nrLib();
 		System.out.println("\nInput the class you would like to move.  -- Example: \"CS120\"");
 		System.out.println(sqlite.readDatabase())
 		Scanner user_input = new Scanner(System.in);
@@ -26,9 +26,7 @@ class ClassMove {
 		System.out.println("Do you want to move the class to the ?");
 		Scanner user_input = new Scanner(System.in);
 		String class;
-
-
-		ResultSet 
+		//nrLib.findTime("FIN412");
 	}
 
 }
