@@ -11,11 +11,15 @@ class ClassMove {
 	public static void main(String [] args) throws SQLException{
 
 		SQLiteAccess sqlite = new SQLiteAccess();
+		Scanner user_input = new Scanner(System.in);
 
 		System.out.println("\nInput the class you would like to move.  -- Example: \"CS120\"");
-		System.out.println(sqlite.readDatabase())
-		Scanner user_input = new Scanner(System.in);
-		String class;
+		
+		String class = user_input.next();
+
+		System.out.println("Which days would you like to move the class to? \"MWF\" or \"TR\"")
+
+		String days = user_input.next();
 
 		List<int> studentTimeMWF = // 	give me a list that only contains the distinct begin times
 									// 	of the students' other classes for MWF
@@ -23,10 +27,8 @@ class ClassMove {
 		List<int> studentTimeTR = // 	give me a list that only contains the distinct begin times
 									// 	of the students' other classes for TR
 
-		System.out.println("Do you want to move the class to the ?");
-		Scanner user_input = new Scanner(System.in);
-		String class;
 
+		
 
 		ResultSet 
 	}

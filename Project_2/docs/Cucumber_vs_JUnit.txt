@@ -1,0 +1,8 @@
+Cucumber is a Behavior Driven Design (BDD) framework that takes "stories" or scenarios written in human readable languages such as English and turns those human readable text into a software test. It is very high level.
+
+JUnit is a lower level "Unit test" tool that allows developers to test every possible code path in their code. It will test each module of your code (classes, or even methods).
+
+
+Basically, Cucumber tests the overall features of what the the code should do and how it should work.
+
+JUnit tests the code for any errors in the classes or methods.
