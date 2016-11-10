@@ -14,22 +14,12 @@ class Test {
 		public static void main(String[] args) throws Exception 
 		{
 			SQLiteAccess sqlite = new SQLiteAccess();
-			NRLib lib = new NRLib();
+			nrLib lib = new nrLib();
 
-			List<String> course = new ArrayList<String>();
-			List<String> maxNum = new ArrayList<String>();
+			// List<String> list = lib.getStudentFromCourse("CS120");
+			List<String> list = lib.getStudentFromCourse("CS120");
 
-			Scanner user_input = new Scanner(System.in);
-			
-			ResultSet rs = sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = 201710");
-
-			while(rs.next()){
-
-				course.add(rs.getString("Subject_Code") + rs.getString("Course_Number"));
-				maxNum.add(rs.getString("Room_Code1"));
-			}
-
-			;
+			System.out.println(list);
 		}
 		/*
 		public static void main(String[] args) throws SQLException {
