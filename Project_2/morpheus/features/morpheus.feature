@@ -22,3 +22,10 @@ Scenario: Get Students in a class.
 	And "Ana Wilson" is in the course.
 	And "Bernard Fisherman" is in the course.
 	And "Bettie Cormany" is in the course.
+
+
+Scenario: Get the classes of a student.
+
+	Given the student "John Joseph Lampl"
+	Then this student is taking "CS120"
+	And this student is taking "DET410"
