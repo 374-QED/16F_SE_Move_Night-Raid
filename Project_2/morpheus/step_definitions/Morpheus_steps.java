@@ -3,23 +3,67 @@ import java.util.*;
 import cucumber.api.java.en.*;
 import cucumber.api.PendingException;
 import static org.junit.Assert.*;
-import implementation.SQLiteAccess;
+import implementation.nrLib;
 import java.sql.ResultSet;
 
 public class Morpheus_steps {
-	static SQLiteAccess sqlite = new SQLiteAccess();
+	static nrLib library = new nrLib();
 	List<String> list;
+	String student_id;
 
 
 	@Given("^the class \"([^\"]*)\"\\.$")
 	public void theClass(String course) throws Throwable {
-	    String[] crs = sqlite.parseCourse(course);
-	    list = sqlite.writeResultSet(sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = 201710 and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
-
+		list = library.getDataFromCourse(course);
 	}
 
-	@Then("^the max enrolled number is (\\d+)\\.$")
+	@Then("^the room number is (\\d+)\\.$")
 	public void theMaxEnrolledNumberIs(String num) throws Throwable {
 	    assertEquals(list.contains(num), true);
 	}
+
+	@Given("^the course \"([^\"]*)\"$")
+	public void theCourse(String course) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    list = library.getStudentFromCourse(course);
+	}
+
+	@Then("^\"([^\"]*)\" is in the course\\.$")
+	public void isInTheCourse(String name) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new PendingException();
+	    assertEquals(list.contains(library.findStudent(name)),true);
+	}
+
+	@Given("^the student \"([^\"]*)\"$")
+	public void theStudent(String name) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new PendingException();
+	    student_id = library.findStudent(name);
+	}
+
+	@Then("^this student is taking \"([^\"]*)\"$")
+	public void thisStudentIsTaking(String course) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new PendingException();
+	    list = library.getStudentFromCourse(course);
+	    assertEquals(list.contains(student_id),true);
+
+	}
+
+	@Given("^the day \"([^\"]*)\" and time \"([^\"]*)\"$")
+	public void theDayAndTime(String day, String time) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new PendingException();
+	    List<String> not_room = library.notavailableRoom(time,day);
+	    List<String> room = library.allRoom();
+	    list = library.comparing(not_room,room);
+	}
+
+	@Then("^room number \"([^\"]*)\" is available$")
+	public void roomNumberIsAvailable(String room) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    assertEquals(list.contains(room),true);
+	}
+
 }

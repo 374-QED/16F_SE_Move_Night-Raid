@@ -7,7 +7,7 @@ import java.sql.*;
 public class nrLib {
 	private static SQLiteAccess test = new SQLiteAccess();
 
-	public static String findStudent(String student_id) throws SQLException
+	public static String findStudentname(String student_id) throws SQLException
 	{
 		//given student id return full name
 		ResultSet student;
@@ -25,14 +25,27 @@ public class nrLib {
 		full_name = first_name.get(0) + " " + middle_name.get(0) + " " + last_name.get(0);
 		return full_name;
 	}
-	public static String findStudent(String first,String second, String third) throws SQLException
+	public static String findStudent(String name) throws SQLException
 	{
 		//get student fullname output student ID
+		String[] split = name.split("\\s+");
 		ResultSet student_id;
 		List<String> id;
-		student_id = test.readDatabase("select distinct Banner_id from class_2017 where First_name = '"+first+"' and Middle_name = '"+second+"' and Last_name = '"+third+"'");
+		student_id = test.readDatabase("select distinct Banner_id from class_2017 where First_name = '"+split[0]+"' and Middle_name = '"+split[1]+"' and Last_name = '"+split[2]+"'");
 		id  = test.writeResultSet(student_id,"Banner_id");
 		return id.get(0); 
+	}
+	public List<String> getStudentFromCourse(String course) throws SQLException
+	{
+		String[] crs = test.parseCourse(course);
+		ResultSet student = test.readDatabase("select Banner_ID from class_2017 where Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'");
+		return test.writeResultSet(student,"Banner_ID");
+	}
+	public List<String> getDataFromCourse(String course) throws SQLException
+	{
+		String[] crs = test.parseCourse(course);
+	    return test.writeResultSet(test.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = '201710' and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
+
 	}
 	public List<String> getAllStartTime(String data) throws SQLException
     {
@@ -82,7 +95,7 @@ public class nrLib {
     	if(days.charAt(0)=='M')
     		temp = test.readDatabase("select distinct Room_Code1 from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and  Begin_Time = '"+time+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
     	else
-    		temp = test.readDatabase("select distinct Room_Code1 from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+    		temp = test.readDatabase("select distinct Room_Code1 from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
    		room = test.writeResultSet(temp,"Room_Code1");
    		return room; 	
     }	

@@ -1,12 +1,12 @@
 Feature: Testing
 
-Scenario Outline: Find the max enrolled in a class.
+Scenario Outline: Find the room number for a class.
 	
 	Given the class <course>.
-	Then the max enrolled number is <maxNum>.
+	Then the room number is <room>.
 
 Examples:
-| course | maxNum |
+| course | room |
 | "ACCT410" | 118 |
 | "BLAW461" | 201 |
 | "CORE110" | 115 |
@@ -17,15 +17,27 @@ Examples:
 Scenario: Get Students in a class.
 
 	Given the course "CS120"
-	Then "Adam Barakat" is in the course.
-	And "Adrienne Stones" is in the course.
-	And "Ana Wilson" is in the course.
-	And "Bernard Fisherman" is in the course.
-	And "Bettie Cormany" is in the course.
+	Then "Rose Thomas Lopez" is in the course.
+	And "Sheri Ruby Begay" is in the course.
+	And "Troy Hannah Frazier" is in the course.
+	And "Christopher Lyle Curry" is in the course.
+	And "Carol Rhonda Mefford" is in the course.
 
 
 Scenario: Get the classes of a student.
 
-	Given the student "John Joseph Lampl"
+	Given the student "Rose Thomas Lopez"
 	Then this student is taking "CS120"
-	And this student is taking "DET410"
+	And this student is taking "ITC460"
+
+Scenario Outline: Room available in given time day
+	Given the day <days> and time <time>
+	Then room number <room> is available
+
+Examples:
+| days | time | room |
+| "MWF"| "900"| "301"|
+| "MWF"| "900"| "214"|
+| "MWF"| "900"| "235"|
+| "TR"| "800"| "235"|
+| "TR"| "1000"| "301"|
