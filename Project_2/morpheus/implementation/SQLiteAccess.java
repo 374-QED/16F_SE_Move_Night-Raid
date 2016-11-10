@@ -83,6 +83,7 @@ public class SQLiteAccess {
         resultSet = readDatabase("select distinct Term_Code from classes order by Term_Code desc");
         return writeString(resultSet,"Term_Code");
     }
+    
  /*
     public List<String> getClassFromTime(String days, String time) throws SQLException {
         // return the classes that have this time

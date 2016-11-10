@@ -9,6 +9,7 @@ public class nrLib {
 
 	public static String findStudent(String student_id) throws SQLException
 	{
+		//given student id return full name
 		ResultSet student;
 		String full_name;
 		List<String> first_name;
@@ -26,14 +27,68 @@ public class nrLib {
 	}
 	public static String findStudent(String first,String second, String third) throws SQLException
 	{
+		//get student fullname output student ID
 		ResultSet student_id;
 		List<String> id;
 		student_id = test.readDatabase("select distinct Banner_id from classes where First_name = '"+first+"' and Middle_name = '"+second+"' and Last_name = '"+third+"'");
 		id  = test.writeResultSet(student_id,"Banner_id");
 		return id.get(0); 
 	}
+	public List<String> getAllStartTime(String data) throws SQLException
+    {
+    	//retrive all time either on "MWF" or "TR"
+    	List<String> all_time = new ArrayList<String>();
+    	ResultSet time;
+    	if(data.charAt(0) == 'M')
+    		time = test.readDatabase("select distinct Begin_Time from classes where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+    	else
+    		time = test.readDatabase("select distinct Begin_Time from classes where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+		all_time = test.writeResultSet(time,"Begin_Time");
+    	return all_time;
+
+    }
+    public List<String> comparing(List<String> data1, List<String> data2) throws SQLException
+    {
+    	//compare two different list of string with same element.
+    	List<String> different = new ArrayList<String>();
+    	if(data1.size() > data2.size())
+    	{
+    		List<String> temp = data1;
+    		data1 = data2;
+    		data2 = temp;
+    	}
+    	for(int x = 0; x < data1.size();x++)
+    	{
+    		for(int y = 0; y < data2.size();y++)
+    		{
+    			if(data1.contains(data2.get(y)) == false)
+    				different.add(data2.get(y));
+    		}
+    	}
+    	return different;
+    }
+    public List<String> allRoom() throws SQLException
+    {
+    	List<String> room = new ArrayList<String>();
+    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from classes");
+    	room = test.writeResultSet(temp,"Room_Code1");
+    	return room;
+    }
+    public List<String> notavailableRoom(String time, String days) throws SQLException
+    {
+    	//given time and day how many room is occupied
+    	List<String> room = new ArrayList<String>();
+    	ResultSet temp;
+    	if(days.charAt(0)=='M')
+    		temp = test.readDatabase("select distinct Room_Code1 from classes where Term_Code = '"+test.getLatestSemester()+"' and  Begin_Time = '"+time+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+    	else
+    		temp = test.readDatabase("select distinct Room_Code1 from classes where Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+   		room = test.writeResultSet(temp,"Room_Code1");
+   		return room; 	
+    }	
 	public static List<String> findTime(String course, String date) throws SQLException
 	{
+		//Aldo wanted this function 
 		String semester = test.getLatestSemester();
 		String[] parse = test.parseCourse(course);
 		ResultSet student_id;

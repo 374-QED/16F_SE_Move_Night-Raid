@@ -37,9 +37,18 @@ class Test {
 			
 			SQLiteAccess sqlite = new SQLiteAccess();
 			nrLib cool = new nrLib();
-
+			/*
+			System.out.println(cool.notavailableRoom("900","MWF"));
+			System.out.println(cool.allRoom());
+			List<String> all = cool.getAllStartTime("MWF");
+			List<String> find = cool.findTime("MKTG320","MWF");
 			
-			//System.out.println(cool.findTime("MKTG320","MWF"));
+			//System.out.println(cool.getAllStartTime("MWF"));
+			System.out.println(cool.getAllStartTime("TR"));
+			System.out.println(cool.findTime("MKTG320","MWF"));
+			System.out.println(cool.comparing(all,find));
+			*/
+
 			
 			List<String> list1 = new ArrayList<String>();
 			List<String> list2 = new ArrayList<String>();
@@ -114,6 +123,7 @@ class Test {
  				System.out.println(cool.findStudent(list5.get(x)));		
  			}
 			//System.out.println(list5);
+			
 			
 	}
 
