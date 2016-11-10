@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.sql.*;
 
-public class NRLib {
+public class nrLib {
 	private static SQLiteAccess test = new SQLiteAccess();
 
 	public static String findStudent(String student_id) throws SQLException
@@ -40,9 +40,9 @@ public class NRLib {
     	List<String> all_time = new ArrayList<String>();
     	ResultSet time;
     	if(data.charAt(0) == 'M')
-    		time = test.readDatabase("select distinct Begin_Time from classes where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+    		time = test.readDatabase("select distinct Begin_Time from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
     	else
-    		time = test.readDatabase("select distinct Begin_Time from classes where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+    		time = test.readDatabase("select distinct Begin_Time from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
 		all_time = test.writeResultSet(time,"Begin_Time");
     	return all_time;
 
@@ -70,7 +70,7 @@ public class NRLib {
     public List<String> allRoom() throws SQLException
     {
     	List<String> room = new ArrayList<String>();
-    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from classes");
+    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from class_2017");
     	room = test.writeResultSet(temp,"Room_Code1");
     	return room;
     }
@@ -80,9 +80,9 @@ public class NRLib {
     	List<String> room = new ArrayList<String>();
     	ResultSet temp;
     	if(days.charAt(0)=='M')
-    		temp = test.readDatabase("select distinct Room_Code1 from classes where Term_Code = '"+test.getLatestSemester()+"' and  Begin_Time = '"+time+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+    		temp = test.readDatabase("select distinct Room_Code1 from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and  Begin_Time = '"+time+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
     	else
-    		temp = test.readDatabase("select distinct Room_Code1 from classes where Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+    		temp = test.readDatabase("select distinct Room_Code1 from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
    		room = test.writeResultSet(temp,"Room_Code1");
    		return room; 	
     }	
