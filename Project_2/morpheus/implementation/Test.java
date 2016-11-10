@@ -31,8 +31,7 @@ class Test {
 
 			;
 		}
-
-/*
+		/*
 		public static void main(String[] args) throws SQLException {
 			
 			SQLiteAccess sqlite = new SQLiteAccess();
@@ -47,7 +46,7 @@ class Test {
 			System.out.println(cool.getAllStartTime("TR"));
 			System.out.println(cool.findTime("MKTG320","MWF"));
 			System.out.println(cool.comparing(all,find));
-			*/
+	
 
 			
 			List<String> list1 = new ArrayList<String>();
@@ -124,12 +123,6 @@ class Test {
  			}
 			//System.out.println(list5);
 			
-<<<<<<< HEAD
-			
 	}
-=======
->>>>>>> 6985a025eacd298cba7aac3b588c87226e5042ca
-
-	}
-*/
+	*/
 }
