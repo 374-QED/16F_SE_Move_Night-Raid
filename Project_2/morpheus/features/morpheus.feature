@@ -1,34 +1,31 @@
 Feature: Testing
 
-Scenario Outline: Asked to change a course to a different time.
+Scenario Outline: Find the max enrolled in a class.
 	
-	Given the days "MWF" and the course "IT410"
-	Then the course can be moved to <time>
+	Given the class <course>.
+	Then the max enrolled number is <maxNum>.
 
 Examples:
-| time |
-| "0800" |
-| "0900" |
-| "1000" |
-| "1100" |
-| "1200" |
-
-Scenario Outline: Asked what students have class at this time.
-
-	Given the days "TR" and start time "1330"
-	Then <Student> has a class at that time
-
-Examples:
-| Student |
-| "Student1" |
-| "Student2" |
-| "Student3" |
-| "Student4" |
-| "Student5" |
-| "Student6" |
+| course | maxNum |
+| "ACCT410" | 118 |
+| "BLAW461" | 201 |
+| "CORE110" | 115 |
+| "CS120" | 318 |
+| "IT220" | 216 |
 
 
-Scenario: Ask for max enrolled.
+Scenario: Get Students in a class.
 
 	Given the course "CS120"
-	Then the max enrolled is "28".
+	Then "Adam Barakat" is in the course.
+	And "Adrienne Stones" is in the course.
+	And "Ana Wilson" is in the course.
+	And "Bernard Fisherman" is in the course.
+	And "Bettie Cormany" is in the course.
+
+
+Scenario: Get the classes of a student.
+
+	Given the student "John Joseph Lampl"
+	Then this student is taking "CS120"
+	And this student is taking "DET410"

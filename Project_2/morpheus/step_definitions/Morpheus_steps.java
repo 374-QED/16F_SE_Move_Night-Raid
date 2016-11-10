@@ -1,4 +1,5 @@
 package step_definitions;
+import java.util.*;
 import cucumber.api.java.en.*;
 import cucumber.api.PendingException;
 import static org.junit.Assert.*;
@@ -6,48 +7,19 @@ import implementation.SQLiteAccess;
 import java.sql.ResultSet;
 
 public class Morpheus_steps {
-	static SQLiteAccess test = new SQLiteAccess();
+	static SQLiteAccess sqlite = new SQLiteAccess();
+	List<String> list;
 
-	
-	@Given("^the days \"([^\"]*)\" and the course \"([^\"]*)\"$")
-	public void theDaysAndTheCourse(String arg1, String arg2) throws Throwable {
-	
-		
-	}
 
-	@Then("^the course can be moved to \"([^\"]*)\"$")
-	public void theCourseCanBeMovedTo(String arg1) throws Throwable {
-		ResultSet rs = test.readDatabase("select * from classes limit 10");
-	    String target = test.writeString(rs, "Banner_ID");
-	    assertEquals(target, target);
-	}
-
-	@Given("^the days \"([^\"]*)\" and start time \"([^\"]*)\"$")
-	public void theDaysAndStartTime(String arg1, String arg2) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    //throw new PendingException();
-	   
+	@Given("^the class \"([^\"]*)\"\\.$")
+	public void theClass(String course) throws Throwable {
+	    String[] crs = sqlite.parseCourse(course);
+	    list = sqlite.writeResultSet(sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = 201710 and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
 
 	}
 
-	@Then("^\"([^\"]*)\" has a class at that time$")
-	public void hasAClassAtThatTime(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    ResultSet rs = test.readDatabase("select * from classes limit 10");
-	    String target = test.writeString(rs, "Banner_ID");
-	    assertEquals(target, target);
-	}
-
-	@Given("^the course \"([^\"]*)\"$")
-	public void theCourse(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	}
-
-	@Then("^the max enrolled is \"([^\"]*)\"\\.$")
-	public void theMaxEnrolledIs(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    ResultSet rs = test.readDatabase("select * from classes limit 10");
-	    String target = test.writeString(rs, "Banner_ID");
-	    assertEquals(target, target);
+	@Then("^the max enrolled number is (\\d+)\\.$")
+	public void theMaxEnrolledNumberIs(String num) throws Throwable {
+	    assertEquals(list.contains(num), true);
 	}
 }
