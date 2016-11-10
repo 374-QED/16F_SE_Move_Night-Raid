@@ -11,28 +11,28 @@ import java.util.ArrayList;
 class Test {
 
 
-// <<<<<<< HEAD
-// 		public static void main(String[] args) throws Exception 
-// 		{
-// 			SQLiteAccess sqlite = new SQLiteAccess();
-// 			nrLib cool = new nrLib();
-// 			List<String> list = new ArrayList<String>();
-// 			List<String> list1 = new ArrayList<String>();
-// 			list = sqlite.getStudentsFromClass("CS120");
-// 			list1 = sqlite.getClassFromTime("MWF","1330");
+		public static void main(String[] args) throws Exception 
+		{
+			SQLiteAccess sqlite = new SQLiteAccess();
+			NRLib lib = new NRLib();
 
-// 			//ResultSet resultSet = sqlite.readDatabase("select * from classes limit 10");
+			List<String> course = new ArrayList<String>();
+			List<String> maxNum = new ArrayList<String>();
 
-// 			//list = sqlite.writeResultSet(resultSet, "Banner_ID");
-// 			/*
-// 			for(int x = 0; x < list.size();x++)
-// 			{
-// 				System.out.println(cool.findStudent(list.get(x)));		
-// 			}
-// 			*/
+			Scanner user_input = new Scanner(System.in)
+			
+			ResultSet rs = sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from classes where Term_Code = 201510");
 
-// 			System.out.println(list1);			
-// =======
+			while(rs.next()){
+
+				course.add(rs.getString("Subject_Code") + rs.getString("Course_Number"));
+				maxNum.add(rs.getString("Room_Code1"));
+			}
+
+			;
+		}
+
+/*
 		public static void main(String[] args) throws SQLException {
 			
 			SQLiteAccess sqlite = new SQLiteAccess();
@@ -115,6 +115,7 @@ class Test {
  			}
 			//System.out.println(list5);
 			
-	}
 
+	}
+*/
 }
