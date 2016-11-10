@@ -19,9 +19,9 @@ class Test {
 			List<String> course = new ArrayList<String>();
 			List<String> maxNum = new ArrayList<String>();
 
-			Scanner user_input = new Scanner(System.in)
+			Scanner user_input = new Scanner(System.in);
 			
-			ResultSet rs = sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from classes where Term_Code = 201510");
+			ResultSet rs = sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = 201710");
 
 			while(rs.next()){
 

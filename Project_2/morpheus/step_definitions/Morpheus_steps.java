@@ -14,7 +14,7 @@ public class Morpheus_steps {
 	@Given("^the class \"([^\"]*)\"\\.$")
 	public void theClass(String course) throws Throwable {
 	    String[] crs = sqlite.parseCourse(course);
-	    list = sqlite.writeResultSet(sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from classes where Term_Code = 201510 and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
+	    list = sqlite.writeResultSet(sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = 201710 and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
 
 	}
 

@@ -7,10 +7,10 @@ Scenario Outline: Find the max enrolled in a class.
 
 Examples:
 | course | maxNum |
-| "ACCT410" | 117 |
-| "BLAW461" | 301 |
+| "ACCT410" | 118 |
+| "BLAW461" | 201 |
 | "CORE110" | 115 |
-| "CS120" | 314 |
+| "CS120" | 318 |
 | "IT220" | 216 |
 
 
