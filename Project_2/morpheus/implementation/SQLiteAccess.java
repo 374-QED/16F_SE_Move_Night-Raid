@@ -6,15 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import org.sqlite.*;
-
 import java.util.*;
+
+// Complexity: 2 + 4 + 3 + 2 + 4 + 3 + 2 + 4
+// total function: 8
 
 public class SQLiteAccess {
 
-	public String[] parseCourse(String name)
+	public String[] parseCourse(String name) 
     {
+        // CC: E - N + P = 2
         int t = 0;
         for(int x = 0; x < name.length();x++)
         {
@@ -28,7 +30,7 @@ public class SQLiteAccess {
         return parts;
     }
 	public ResultSet readDatabase(String query){
-
+        // CC: E - N + P = 4
 		Connection connect = null;
 		Statement statement = null;
 		PreparedStatement preparedStatement = null;
@@ -63,6 +65,7 @@ public class SQLiteAccess {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     
 	public List<String> getStudentsFromClass(String course) throws SQLException {
+        //CC = E - N + P = 3
 		Connection connect = null;
 		Statement statement = null;
 		PreparedStatement preparedStatement = null;
@@ -76,6 +79,7 @@ public class SQLiteAccess {
 
     public String getLatestSemester() throws SQLException {
         // return the latest semester
+        //CC = E - N + P = 2
         Connection connect = null;
 		Statement statement = null;
 		PreparedStatement preparedStatement = null;
@@ -105,7 +109,7 @@ public class SQLiteAccess {
 	public void writeMetaData(ResultSet resultSet) throws SQLException {
         // Now get some metadata from the database
         // Result set get the result of the SQL query
-
+        // CC = 4
         System.out.println("The columns in the table are: ");
 
         System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
@@ -117,6 +121,7 @@ public class SQLiteAccess {
     public List<String> writeResultSet(ResultSet resultSet, String column_set) {
         // ResultSet is initially before the first data set
         //System.out.println("Hello");
+        // CC = 3
         try {
             List<String> item = new ArrayList<String>();
     
@@ -134,11 +139,13 @@ public class SQLiteAccess {
     }
 
     public String writeString(ResultSet resultSet, String column_set) throws SQLException {
+            //CC = 2
             return resultSet.getString(column_set);
     }
 
     // You need to close the resultSet
     private void close() {
+        // CC = 4
     	Connection connect = null;
 		Statement statement = null;
 		PreparedStatement preparedStatement = null;

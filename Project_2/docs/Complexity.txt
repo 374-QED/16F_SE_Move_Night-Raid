@@ -1,0 +1,32 @@
+nrLib:
+findStudentname() CC = 6
+findStudent() CC = 3
+getStudentFromCourse() CC = 3
+getDataFromCourse() CC = 2
+getAllStartTime() CC = 5
+comparing() CC = 3
+allRoom() CC = 2
+notavailableRoom() CC = 5
+findTime() CC = 8
+
+SQLiteAccess:
+parseCourse() CC = 2
+readDatabase() CC = 4
+getStudentsFromClass() CC = 3
+getLatestSemester() CC = 2
+writeMetaData() CC = 4
+writeResultSet() CC = 3
+writeString() CC = 2
+close() CC = 4
+
+CSVparser:
+parseCourse() CC = 2
+parsePreReq() CC = 5
+
+
+Average Complexity: 3.578947368
+Standard Deviation: 1.5999986194
+Number of functions: 19
+Summary of this distribution:
+	The whole sample is screwed to the right. I am confidence that 95% of the
+	data is between 2.8595 and 4.2984 using Z test distribution interval.

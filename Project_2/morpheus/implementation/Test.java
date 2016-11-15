@@ -14,7 +14,7 @@ class Test {
 		public static void main(String[] args) throws Exception 
 		{
 			SQLiteAccess sqlite = new SQLiteAccess();
-			NRLib lib = new NRLib();
+			nrLib lib = new nrLib();
 
 			List<String> course = new ArrayList<String>();
 			List<String> maxNum = new ArrayList<String>();
@@ -29,7 +29,7 @@ class Test {
 				maxNum.add(rs.getString("Room_Code1"));
 			}
 
-			;
+			System.out.println(" \033[2J"); // clear screen only work if there is ANSICON
 		}
 		/*
 		public static void main(String[] args) throws SQLException {

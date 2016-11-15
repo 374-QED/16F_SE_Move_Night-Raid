@@ -58,6 +58,8 @@ public class Morpheus_steps {
 	    List<String> not_room = library.notavailableRoom(time,day);
 	    List<String> room = library.allRoom();
 	    list = library.comparing(not_room,room);
+	    //list.sort();
+	 	//System.out.println(list);
 	}
 
 	@Then("^room number \"([^\"]*)\" is available$")

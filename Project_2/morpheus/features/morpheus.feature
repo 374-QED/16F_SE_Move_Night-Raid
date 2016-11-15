@@ -37,7 +37,7 @@ Scenario Outline: Room available in given time day
 Examples:
 | days | time | room |
 | "MWF"| "900"| "301"|
-| "MWF"| "900"| "214"|
+| "MWF"| "900"| "260"|
 | "MWF"| "900"| "235"|
 | "TR"| "800"| "235"|
 | "TR"| "1000"| "301"|

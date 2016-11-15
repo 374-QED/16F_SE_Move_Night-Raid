@@ -4,11 +4,15 @@ import java.io.*;
 import java.util.*;
 import java.sql.*;
 
+//complexity: 6,3,3,2,5,3,2,5,8
+//total: 9
+
 public class nrLib {
 	private static SQLiteAccess test = new SQLiteAccess();
 
 	public static String findStudentname(String student_id) throws SQLException
 	{
+		// CC = 6
 		//given student id return full name
 		ResultSet student;
 		String full_name;
@@ -28,6 +32,7 @@ public class nrLib {
 	public static String findStudent(String name) throws SQLException
 	{
 		//get student fullname output student ID
+		// CC = 3
 		String[] split = name.split("\\s+");
 		ResultSet student_id;
 		List<String> id;
@@ -37,19 +42,22 @@ public class nrLib {
 	}
 	public List<String> getStudentFromCourse(String course) throws SQLException
 	{
+		// CC = 3
 		String[] crs = test.parseCourse(course);
 		ResultSet student = test.readDatabase("select Banner_ID from class_2017 where Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'");
 		return test.writeResultSet(student,"Banner_ID");
 	}
 	public List<String> getDataFromCourse(String course) throws SQLException
 	{
+		// CC = 2
 		String[] crs = test.parseCourse(course);
-	    return test.writeResultSet(test.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = '201710' and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
+	    return test.writeResultSet(test.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = '"+ test.getLatestSemester()+"' and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
 
 	}
 	public List<String> getAllStartTime(String data) throws SQLException
     {
     	//retrive all time either on "MWF" or "TR"
+    	// CC = 5
     	List<String> all_time = new ArrayList<String>();
     	ResultSet time;
     	if(data.charAt(0) == 'M')
@@ -62,26 +70,22 @@ public class nrLib {
     }
     public List<String> comparing(List<String> data1, List<String> data2) throws SQLException
     {
+    	// CC = 3
     	//compare two different list of string with same element.
     	List<String> different = new ArrayList<String>();
-    	if(data1.size() > data2.size())
+    	for(int x = 0; x < data2.size();x++)
     	{
-    		List<String> temp = data1;
-    		data1 = data2;
-    		data2 = temp;
-    	}
-    	for(int x = 0; x < data1.size();x++)
-    	{
-    		for(int y = 0; y < data2.size();y++)
+    		if(data1.contains(data2.get(x))==false)
     		{
-    			if(data1.contains(data2.get(y)) == false)
-    				different.add(data2.get(y));
+    			different.add(data2.get(x));
     		}
     	}
+    	
     	return different;
     }
     public List<String> allRoom() throws SQLException
     {
+    	//CC = 2
     	List<String> room = new ArrayList<String>();
     	ResultSet temp = test.readDatabase("select distinct Room_Code1 from class_2017");
     	room = test.writeResultSet(temp,"Room_Code1");
@@ -90,6 +94,7 @@ public class nrLib {
     public List<String> notavailableRoom(String time, String days) throws SQLException
     {
     	//given time and day how many room is occupied
+    	//CC = 5
     	List<String> room = new ArrayList<String>();
     	ResultSet temp;
     	if(days.charAt(0)=='M')
@@ -101,6 +106,7 @@ public class nrLib {
     }	
 	public static List<String> findTime(String course, String date) throws SQLException
 	{
+		//CC = 8
 		//Aldo wanted this function 
 		String semester = test.getLatestSemester();
 		String[] parse = test.parseCourse(course);

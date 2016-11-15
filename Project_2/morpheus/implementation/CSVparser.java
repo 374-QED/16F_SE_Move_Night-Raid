@@ -7,9 +7,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+
+//Complexity: 2 + 5
+//total: 2
 public class CSVparser {
     public String[] parseCourse(String name)
     {
+        //CC = 2
         int t = 0;
         for(int x = 0; x < name.length();x++)
         {
@@ -27,6 +31,7 @@ public class CSVparser {
 	// 	// Will parse the csv file, using the "class" argument
 	// 	// to get an array of strings that contains the prerequisites
 	// 	// of the class
+    // CC = 5
     String csvFile = new File("resources/prereq.csv").getAbsolutePath();
         BufferedReader br = null;
         String line = "";
