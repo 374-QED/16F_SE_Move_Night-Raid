@@ -30,6 +30,17 @@ Scenario: Get the classes of a student.
 	Then this student is taking "CS120"
 	And this student is taking "ITC460"
 
+
+Scenario: Get distinct start time for classes.
+	
+	Given the days "MWF"
+	Then a class start time is "800"
+	And a class start time is "900"
+	And a class start time is "1000"
+	And a class start time is "1200"
+	And a class start time is "1300"
+
+
 Scenario Outline: Room available in given time day
 	Given the day <days> and time <time>
 	Then room number <room> is available

@@ -40,6 +40,7 @@ public class nrLib {
 		id  = test.writeResultSet(student_id,"Banner_id");
 		return id.get(0); 
 	}
+	
 	public List<String> getStudentFromCourse(String course) throws SQLException
 	{
 		// CC = 3
@@ -47,6 +48,12 @@ public class nrLib {
 		ResultSet student = test.readDatabase("select Banner_ID from class_2017 where Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'");
 		return test.writeResultSet(student,"Banner_ID");
 	}
+
+	public ResultSet getStudentsClasses(String banner_id) throws SQLException
+	{
+		return test.readDatabase("select * from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Banner_id = '"+banner_id+"'");
+	}
+
 	public List<String> getDataFromCourse(String course) throws SQLException
 	{
 		// CC = 2

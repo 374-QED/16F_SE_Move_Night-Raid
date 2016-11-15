@@ -68,4 +68,14 @@ public class Morpheus_steps {
 	    assertEquals(list.contains(room),true);
 	}
 
+	@Given("^the days \"([^\"]*)\"$")
+	public void theDays(String arg1) throws Throwable {
+	    list = library.getAllStartTime(arg1);
+	}
+
+	@Then("^a class start time is \"([^\"]*)\"$")
+	public void aClassStartTimeIs(String arg1) throws Throwable {
+	    assertEquals(list.contains(arg1), true);
+	}
+
 }

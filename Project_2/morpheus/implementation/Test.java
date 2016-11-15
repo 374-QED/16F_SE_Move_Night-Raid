@@ -16,9 +16,8 @@ class Test {
 			SQLiteAccess sqlite = new SQLiteAccess();
 			nrLib lib = new nrLib();
 
-			List<String> course = new ArrayList<String>();
-			List<String> maxNum = new ArrayList<String>();
-
+			// List<String> list = lib.getStudentFromCourse("CS120");
+			List<String> list = lib.getStudentFromCourse("CS120");
 			Scanner user_input = new Scanner(System.in);
 			
 			ResultSet rs = sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = 201710");
@@ -30,6 +29,8 @@ class Test {
 			}
 
 			System.out.println(" \033[2J"); // clear screen only work if there is ANSICON
+			System.out.println(list);
+
 		}
 		/*
 		public static void main(String[] args) throws SQLException {
