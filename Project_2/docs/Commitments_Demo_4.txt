@@ -1,0 +1,5 @@
+- Add the "crn" column to the database for more precise queries
+
+- Add complexity docs and use the cyclomatic complexity tool
+
+- Add method to collect the classes of a student (ResultSet type instead)
