@@ -2,4 +2,6 @@
 
 - Add complexity docs and use the cyclomatic complexity tool
 
-- Add method to collect the classes of a student (ResultSet type instead)
+- Add method to collect the classes of a student (ResultSet type instead and change to list later)
+
+- Add one more scenario
