@@ -20,7 +20,7 @@ class Test {
 			List<String> list = lib.getStudentFromCourse("CS120");
 			Scanner user_input = new Scanner(System.in);
 			
-			ResultSet rs = sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = 201710");
+			ResultSet rs = sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2016 where Term_Code = 201710");
 
 			while(rs.next()){
 
@@ -67,7 +67,7 @@ class Test {
 
 			String begin_time;
 		
-			ResultSet resultSet1 = sqlite.readDatabase("select distinct Term_Code from class_2017");
+			ResultSet resultSet1 = sqlite.readDatabase("select distinct Term_Code from class_2016");
 			list1 = sqlite.writeResultSet(resultSet1, "Term_Code");
 
 			System.out.println("Available semesters: ");
@@ -81,7 +81,7 @@ class Test {
 			semester = user_input.next();
 			System.out.println("");
 
-			ResultSet resultSet2 = sqlite.readDatabase("select distinct subject_code from class_2017");
+			ResultSet resultSet2 = sqlite.readDatabase("select distinct subject_code from class_2016");
 			list2 = sqlite.writeResultSet(resultSet2, "Subject_Code");
 			System.out.println("Available Subjects: ");
 			for(int i = 0; i < list2.size(); i++)
@@ -95,9 +95,9 @@ class Test {
 
 			String[] parts = sqlite.parseCourse(course);
 
-			ResultSet resultSet3 = sqlite.readDatabase("select begin_time from class_2017 where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' order by begin_time asc");
+			ResultSet resultSet3 = sqlite.readDatabase("select begin_time from class_2016 where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' order by begin_time asc");
 			list3 = sqlite.writeResultSet(resultSet3, "Begin_Time");
-			ResultSet resultSet4 = sqlite.readDatabase("select Room_Code1 from class_2017 where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' order by begin_time asc");
+			ResultSet resultSet4 = sqlite.readDatabase("select Room_Code1 from class_2016 where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' order by begin_time asc");
 			list4 = sqlite.writeResultSet(resultSet4, "Room_Code1");
 			System.out.println("Available Class Times and Rooms: ");
 			
@@ -119,7 +119,7 @@ class Test {
 			room_code1 = user_input.next();
 			System.out.println("");
 
-			ResultSet resultSet5 = sqlite.readDatabase("select * from class_2017 where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' and begin_time = '"+begin_time+"' and room_code1 = '"+room_code1+"'");
+			ResultSet resultSet5 = sqlite.readDatabase("select * from class_2016 where Term_Code = '"+semester+"' and Subject_Code = '"+parts[0]+"' and Course_Number = '"+parts[1]+"' and begin_time = '"+begin_time+"' and room_code1 = '"+room_code1+"'");
 			list5 = sqlite.writeResultSet(resultSet5, "Banner_ID");
 			for(int x = 0; x < list5.size();x++)
  			{

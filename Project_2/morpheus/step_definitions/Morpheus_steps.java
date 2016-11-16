@@ -28,6 +28,11 @@ public class Morpheus_steps {
 	    list = library.getStudentFromCourse(course);
 	}
 
+	@Given("^the CRN (\\d+)$")
+	public void theCRN(int crn) throws Throwable {
+	    list = library.getStudentFromCourse_CRN(crn);
+	}
+
 	@Then("^\"([^\"]*)\" is in the course\\.$")
 	public void isInTheCourse(String name) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions

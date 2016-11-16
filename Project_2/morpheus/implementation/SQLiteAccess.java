@@ -41,7 +41,7 @@ public class SQLiteAccess {
 			Class.forName("org.sqlite.JDBC");
 
 			// Setup connection with database    getConnection("database", "username", "password")
-			connect = DriverManager.getConnection("jdbc:sqlite:resources/SQLite/class_2016.db");
+			connect = DriverManager.getConnection("jdbc:sqlite:resources/SQLite/class_2016");
 			// Statements allow to issue SQL queries to the database
 	        statement = connect.createStatement();
 
@@ -72,7 +72,7 @@ public class SQLiteAccess {
 		ResultSet resultSet = null;
 		String word = "Banner_id";
 		String[] parts = parseCourse(course);
-		resultSet = readDatabase("select Banner_id from class_2017 where Term_Code = '"+getLatestSemester()+"' and Subject_Code = '"+parts[0]+"' and Course_number = '"+parts[1]+"'");
+		resultSet = readDatabase("select Banner_id from class_2016 where Term_Code = '"+getLatestSemester()+"' and Subject_Code = '"+parts[0]+"' and Course_number = '"+parts[1]+"'");
 		return writeResultSet(resultSet, word);
 	}
 
@@ -84,7 +84,7 @@ public class SQLiteAccess {
 		Statement statement = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-        resultSet = readDatabase("select distinct Term_Code from class_2017 where Term_Code != 0 order by Term_Code desc");
+        resultSet = readDatabase("select distinct Term_Code from class_2016 where Term_Code != 0 order by Term_Code desc");
         return writeString(resultSet,"Term_Code");
     }
     

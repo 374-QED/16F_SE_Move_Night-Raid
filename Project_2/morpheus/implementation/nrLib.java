@@ -19,11 +19,11 @@ public class nrLib {
 		List<String> first_name;
 		List<String> middle_name;
 		List<String> last_name;
-		student = test.readDatabase("select distinct First_name, Middle_name, Last_name from class_2017 where Banner_id = '"+student_id+"'");
+		student = test.readDatabase("select distinct First_name, Middle_name, Last_name from class_2016 where Banner_Id = '"+student_id+"'");
 		first_name = test.writeResultSet(student, "First_name");
-		student = test.readDatabase("select distinct First_name, Middle_name, Last_name from class_2017 where Banner_id = '"+student_id+"'");
+		student = test.readDatabase("select distinct First_name, Middle_name, Last_name from class_2016 where Banner_Id = '"+student_id+"'");
 		middle_name = test.writeResultSet(student, "Middle_name");
-		student = test.readDatabase("select distinct First_name, Middle_name, Last_name from class_2017 where Banner_id = '"+student_id+"'");		
+		student = test.readDatabase("select distinct First_name, Middle_name, Last_name from class_2016 where Banner_Id = '"+student_id+"'");		
 		last_name = test.writeResultSet(student, "Last_name");
 		//System.out.println(first_name);
 		full_name = first_name.get(0) + " " + middle_name.get(0) + " " + last_name.get(0);
@@ -36,7 +36,7 @@ public class nrLib {
 		String[] split = name.split("\\s+");
 		ResultSet student_id;
 		List<String> id;
-		student_id = test.readDatabase("select distinct Banner_id from class_2017 where First_name = '"+split[0]+"' and Middle_name = '"+split[1]+"' and Last_name = '"+split[2]+"'");
+		student_id = test.readDatabase("select distinct Banner_id from class_2016 where First_name = '"+split[0]+"' and Middle_name = '"+split[1]+"' and Last_name = '"+split[2]+"'");
 		id  = test.writeResultSet(student_id,"Banner_id");
 		return id.get(0); 
 	}
@@ -45,20 +45,27 @@ public class nrLib {
 	{
 		// CC = 3
 		String[] crs = test.parseCourse(course);
-		ResultSet student = test.readDatabase("select Banner_ID from class_2017 where Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'");
+		ResultSet student = test.readDatabase("select Banner_ID from class_2016 where Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'");
+		return test.writeResultSet(student,"Banner_ID");
+	}
+
+	public List<String> getStudentFromCourse_CRN(int crn) throws SQLException
+	{
+		// CC = 3
+		ResultSet student = test.readDatabase("select Banner_ID from class_2016 where CRN = '"+ crn + "'");
 		return test.writeResultSet(student,"Banner_ID");
 	}
 
 	public ResultSet getStudentsClasses(String banner_id) throws SQLException
 	{
-		return test.readDatabase("select * from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Banner_id = '"+banner_id+"'");
+		return test.readDatabase("select * from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Banner_id = '"+banner_id+"'");
 	}
 
 	public List<String> getDataFromCourse(String course) throws SQLException
 	{
 		// CC = 2
 		String[] crs = test.parseCourse(course);
-	    return test.writeResultSet(test.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2017 where Term_Code = '"+ test.getLatestSemester()+"' and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
+	    return test.writeResultSet(test.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2016 where Term_Code = '"+ test.getLatestSemester()+"' and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
 
 	}
 	public List<String> getAllStartTime(String data) throws SQLException
@@ -68,9 +75,9 @@ public class nrLib {
     	List<String> all_time = new ArrayList<String>();
     	ResultSet time;
     	if(data.charAt(0) == 'M')
-    		time = test.readDatabase("select distinct Begin_Time from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
     	else
-    		time = test.readDatabase("select distinct Begin_Time from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
 		all_time = test.writeResultSet(time,"Begin_Time");
     	return all_time;
 
@@ -94,7 +101,7 @@ public class nrLib {
     {
     	//CC = 2
     	List<String> room = new ArrayList<String>();
-    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from class_2017");
+    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from class_2016");
     	room = test.writeResultSet(temp,"Room_Code1");
     	return room;
     }
@@ -105,9 +112,9 @@ public class nrLib {
     	List<String> room = new ArrayList<String>();
     	ResultSet temp;
     	if(days.charAt(0)=='M')
-    		temp = test.readDatabase("select distinct Room_Code1 from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and  Begin_Time = '"+time+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+    		temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and  Begin_Time = '"+time+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
     	else
-    		temp = test.readDatabase("select distinct Room_Code1 from class_2017 where Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+    		temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
    		room = test.writeResultSet(temp,"Room_Code1");
    		return room; 	
     }	
@@ -119,9 +126,9 @@ public class nrLib {
 		String[] parse = test.parseCourse(course);
 		ResultSet student_id;
 		if(date.charAt(0) == 'M')
-			student_id = test.readDatabase("select distinct Banner_id from class_2017 where Subject_Code = '"+parse[0]+"' and Course_Number ='"+parse[1]+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+			student_id = test.readDatabase("select distinct Banner_id from class_2016 where Subject_Code = '"+parse[0]+"' and Course_Number ='"+parse[1]+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
 		else
-			student_id = test.readDatabase("select distinct Banner_id from class_2017 where Subject_Code = '"+parse[0]+"' and Course_Number ='"+parse[1]+"' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+			student_id = test.readDatabase("select distinct Banner_id from class_2016 where Subject_Code = '"+parse[0]+"' and Course_Number ='"+parse[1]+"' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
 
 		List<String> student =  test.writeResultSet(student_id, "Banner_id");
 		List<String> dist_time = new ArrayList<String>();
@@ -129,9 +136,9 @@ public class nrLib {
 		{
 			ResultSet class_t;
 			if(date.charAt(0) == 'M')
-				class_t = test.readDatabase("select distinct Begin_Time from class_2017 where Banner_id = '"+student.get(x)+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
 			else
-				class_t = test.readDatabase("select distinct Begin_Time from class_2017 where Banner_id = '"+student.get(x)+ "' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+ "' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
 			List<String> class_time = test.writeResultSet(class_t, "Begin_Time");
 			for(int y = 0; y < class_time.size();y++)
 			{

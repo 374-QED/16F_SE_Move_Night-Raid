@@ -23,6 +23,15 @@ Scenario: Get Students in a class.
 	And "Christopher Lyle Curry" is in the course.
 	And "Carol Rhonda Mefford" is in the course.
 
+Scenario: Get Students in a CRN.
+
+	Given the CRN 10859
+	Then "Rose Thomas Lopez" is in the course.
+	And "Sheri Ruby Begay" is in the course.
+	And "Troy Hannah Frazier" is in the course.
+	And "Christopher Lyle Curry" is in the course.
+	And "Carol Rhonda Mefford" is in the course.
+
 
 Scenario: Get the classes of a student.
 
