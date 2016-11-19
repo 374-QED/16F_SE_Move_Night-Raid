@@ -16,20 +16,9 @@ class Test {
 			SQLiteAccess sqlite = new SQLiteAccess();
 			nrLib lib = new nrLib();
 
-			// List<String> list = lib.getStudentFromCourse("CS120");
-			List<String> list = lib.getStudentFromCourse("CS120");
-			Scanner user_input = new Scanner(System.in);
-			
-			ResultSet rs = sqlite.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2016 where Term_Code = 201710");
-
-			while(rs.next()){
-
-				course.add(rs.getString("Subject_Code") + rs.getString("Course_Number"));
-				maxNum.add(rs.getString("Room_Code1"));
-			}
-
-			System.out.println(" \033[2J"); // clear screen only work if there is ANSICON
-			System.out.println(list);
+			List<String> temp = lib.comparing(nrLib.findTime("10902", "MWF",1), lib.getAllStartTime("MWF"));
+			// System.out.println(temp);
+			System.out.println(lib.comparing(lib.notavailableRoom("1200", "MWF"), lib.allRoom()));
 
 		}
 		/*

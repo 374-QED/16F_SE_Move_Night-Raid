@@ -75,9 +75,9 @@ public class nrLib {
     	List<String> all_time = new ArrayList<String>();
     	ResultSet time;
     	if(data.charAt(0) == 'M')
-    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F' and Begin_Time >= 800 and Begin_Time <= 1500 order by Begin_Time");
     	else
-    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' and Begin_Time >= 800 and Begin_Time <= 1500 and (End_Time - Begin_Time) = 120 order by Begin_Time");
 		all_time = test.writeResultSet(time,"Begin_Time");
     	return all_time;
 
@@ -101,7 +101,7 @@ public class nrLib {
     {
     	//CC = 2
     	List<String> room = new ArrayList<String>();
-    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from class_2016");
+    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Bldg_Code1 = 'MBB' order by Room_Code1");
     	room = test.writeResultSet(temp,"Room_Code1");
     	return room;
     }
@@ -112,23 +112,24 @@ public class nrLib {
     	List<String> room = new ArrayList<String>();
     	ResultSet temp;
     	if(days.charAt(0)=='M')
-    		temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and  Begin_Time = '"+time+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+    		temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Bldg_Code1 = 'MBB' and Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F' order by Room_Code1");
     	else
-    		temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+    		temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Bldg_Code1 = 'MBB' and Term_Code = '"+test.getLatestSemester()+"' and Begin_Time = '"+time+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' order by Room_Code1");
    		room = test.writeResultSet(temp,"Room_Code1");
    		return room; 	
     }	
-	public static List<String> findTime(String course, String date) throws SQLException
+	public static List<String> findTime(String crn, String date, int priority) throws SQLException
 	{
 		//CC = 8
 		//Aldo wanted this function 
 		String semester = test.getLatestSemester();
-		String[] parse = test.parseCourse(course);
+		//String[] parse = test.parseCourse(course);
 		ResultSet student_id;
-		if(date.charAt(0) == 'M')
-			student_id = test.readDatabase("select distinct Banner_id from class_2016 where Subject_Code = '"+parse[0]+"' and Course_Number ='"+parse[1]+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+		
+		if(priority == 1)
+			student_id = test.readDatabase("select distinct Banner_id from class_2016 where Class_Desc = 'Senior' and CRN = '"+crn+"' and Term_Code = '"+semester+"'");
 		else
-			student_id = test.readDatabase("select distinct Banner_id from class_2016 where Subject_Code = '"+parse[0]+"' and Course_Number ='"+parse[1]+"' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+			student_id = test.readDatabase("select distinct Banner_id from class_2016 where CRN = '"+crn+"' and Term_Code = '"+semester+"'");
 
 		List<String> student =  test.writeResultSet(student_id, "Banner_id");
 		List<String> dist_time = new ArrayList<String>();
@@ -136,9 +137,9 @@ public class nrLib {
 		{
 			ResultSet class_t;
 			if(date.charAt(0) == 'M')
-				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F'");
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F' order by Begin_Time");
 			else
-				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+ "' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'");
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+ "' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' order by Begin_Time");
 			List<String> class_time = test.writeResultSet(class_t, "Begin_Time");
 			for(int y = 0; y < class_time.size();y++)
 			{
