@@ -17,7 +17,7 @@ class Test {
 			nrLib lib = new nrLib();
 
 			List<String> temp = lib.comparing(nrLib.findTime("10902", "MWF",1), lib.getAllStartTime("MWF"));
-			// System.out.println(temp);
+			System.out.println(temp);
 			System.out.println(lib.comparing(lib.notavailableRoom("1200", "MWF"), lib.allRoom()));
 
 		}

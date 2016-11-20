@@ -128,6 +128,8 @@ public class nrLib {
 		
 		if(priority == 1)
 			student_id = test.readDatabase("select distinct Banner_id from class_2016 where Class_Desc = 'Senior' and CRN = '"+crn+"' and Term_Code = '"+semester+"'");
+		else if(priority == 2)
+			student_id = test.readDatabase("select distinct Banner_id from class_2016 where Class_Desc = 'Junior' and CRN = '"+crn+"' and Term_Code = '"+semester+"'");
 		else
 			student_id = test.readDatabase("select distinct Banner_id from class_2016 where CRN = '"+crn+"' and Term_Code = '"+semester+"'");
 
