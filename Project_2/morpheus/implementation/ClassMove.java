@@ -10,7 +10,14 @@ import java.util.ArrayList;
 
 class ClassMove {
 
-	public static void main(String [] args) throws SQLException{
+	public static void clearScreen(int n){
+		if(n != 0){ 
+			System.out.print("\n");
+			clearScreen(n-1);
+		}
+	}
+
+	public static void main(String [] args) throws Exception{
 
 		SQLiteAccess sqlite = new SQLiteAccess();
 		Scanner user_input = new Scanner(System.in);
@@ -21,6 +28,7 @@ class ClassMove {
 
 		while(true)
 		{
+			System.out.print("\033[2J\033[1;1H");
 	
 			System.out.println("\nInput the CRN of the class you would like to move or QUIT to stop.");
 			
@@ -83,6 +91,9 @@ class ClassMove {
 
 				System.out.println("\nSorry, there does not seem to be an available time slot for this class.\n\n");
 
+
+			System.out.println("Press Enter to continue...");
+			input = user_input.next();
 		}
 		
 	}
