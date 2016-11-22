@@ -55,7 +55,7 @@ class ClassMove {
 			
 			if(t_avail.isEmpty()) {
 
-				System.out.println("\nThe class you want to move has time conflicts with all times. Do you want to prioritize Seniors? Yes or No?");
+				System.out.println("\nThe class you want to move has time conflicts with all times.\nDo you want to prioritize Seniors? Yes or No?");
 				input = user_input.next();
 				input = input.toUpperCase();
 				if(input.equals("YES")) {
@@ -92,8 +92,9 @@ class ClassMove {
 				System.out.println("\nSorry, there does not seem to be an available time slot for this class.\n\n");
 
 
-			System.out.println("Press Enter to continue...");
-			input = user_input.next();
+			System.out.println("Press \"Enter\" to continue...");
+			Scanner scanner = new Scanner(System.in);
+   			scanner.nextLine();
 		}
 		
 	}
