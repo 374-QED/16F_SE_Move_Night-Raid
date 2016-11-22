@@ -85,14 +85,14 @@ class ClassMove {
 				System.out.println("Choose one of the following rooms: \n" + temp);
 				input = user_input.next();
 
-				System.out.println("You can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+input+" room of the MBB\n\n\n");
+				System.out.println("\n\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+input+" room of the MBB\n\n\n");
 			}
 			else
 
 				System.out.println("\nSorry, there does not seem to be an available time slot for this class.\n\n");
 
 
-			System.out.println("Press \"Enter\" to continue...");
+			System.out.print("Press \"Enter\" to continue...");
 			Scanner scanner = new Scanner(System.in);
    			scanner.nextLine();
 		}
