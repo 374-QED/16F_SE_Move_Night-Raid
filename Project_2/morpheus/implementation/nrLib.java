@@ -48,7 +48,23 @@ public class nrLib {
 		ResultSet student = test.readDatabase("select Banner_ID from class_2016 where Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'");
 		return test.writeResultSet(student,"Banner_ID");
 	}
+	public List<String> crn_time(String crn) throws SQLException
+	{
+		ResultSet crn1 = test.readDatabase("select distinct Begin_Time from class_2016 where CRN = '"+crn+"'");
+		return test.writeResultSet(crn1,"Begin_Time");
+	}
 
+	public List<String> crn_day(String crn) throws SQLException
+	{
+		ResultSet crn1 = test.readDatabase("select distinct Begin_Time, Monday_Ind1 from class_2016 where CRN = '"+crn+"'");
+		return test.writeResultSet(crn1,"Monday_Ind1");
+	}
+
+	public List<String> crn_Exit() throws SQLException
+	{
+		ResultSet crn = test.readDatabase("select distinct CRN from class_2016");
+		return test.writeResultSet(crn,"CRN");
+	}
 	public List<String> getStudentFromCourse_CRN(int crn) throws SQLException
 	{
 		// CC = 3
@@ -75,9 +91,9 @@ public class nrLib {
     	List<String> all_time = new ArrayList<String>();
     	ResultSet time;
     	if(data.charAt(0) == 'M')
-    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F' and Begin_Time >= 800 and Begin_Time <= 1500 order by Begin_Time");
+    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F' and Begin_Time >= 800 and Begin_Time <= 1700 order by Begin_Time");
     	else
-    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' and Begin_Time >= 800 and Begin_Time <= 1500 and (End_Time - Begin_Time) = 120 order by Begin_Time");
+    		time = test.readDatabase("select distinct Begin_Time from class_2016 where Term_Code = '"+test.getLatestSemester()+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' and Begin_Time >= 800 and Begin_Time <= 1700 and (End_Time - Begin_Time) = 120 order by Begin_Time");
 		all_time = test.writeResultSet(time,"Begin_Time");
     	return all_time;
 
@@ -86,6 +102,10 @@ public class nrLib {
     {
     	// CC = 3
     	//compare two different list of string with same element.
+    	if(data1.size()==0)
+    		return data2;
+    	else if(data2.size()==0)
+    		return data1;
     	List<String> different = new ArrayList<String>();
     	for(int x = 0; x < data2.size();x++)
     	{
@@ -97,11 +117,28 @@ public class nrLib {
     	
     	return different;
     }
+    public List<String> comparingRoom(List<String> all, List<String> data2) throws SQLException
+    {
+    	// CC = 3
+    	//compare two different list of string with same element.
+    	if(data2.size()==0)
+    		return all;
+    	List<String> different = new ArrayList<String>();
+    	for(int x = 0; x < data2.size();x++)
+    	{
+    		if(all.contains(data2.get(x))==false)
+    		{
+    			different.add(data2.get(x));
+    		}
+    	}
+    	
+    	return different;
+    }
     public List<String> allRoom() throws SQLException
     {
     	//CC = 2
     	List<String> room = new ArrayList<String>();
-    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Bldg_Code1 = 'MBB' order by Room_Code1");
+    	ResultSet temp = test.readDatabase("select distinct Room_Code1 from class_2016 where Bldg_Code1 = 'MBB' and Term_Code = '"+test.getLatestSemester()+"' order by Room_Code1");
     	room = test.writeResultSet(temp,"Room_Code1");
     	return room;
     }
@@ -152,4 +189,48 @@ public class nrLib {
 		}
 		return dist_time;
 	}
+	public boolean error_term(String crn, String days) throws SQLException
+	{
+		List<String> not_all = findTime(crn,days,0);
+		List<String> all = getAllStartTime(days);
+		List<String> single = crn_day(crn);
+		List<String> single_t = crn_time(crn);
+		List<String> compare = new ArrayList<String>();
+		String s = ""+days.charAt(0);
+		if(s == single.get(0))
+		{
+			compare = comparing(not_all,all);
+			if(compare.size() == 0)
+				return false;
+			else
+			{	
+				int count = 0;
+				for(int x = 0; x < compare.size();x++)
+				{
+					if(not_all.contains(compare.get(x)) || single_t.get(0) == compare.get(0))
+						count++;
+				}
+				if(count == compare.size())
+					return false;
+			}
+		}
+		else
+		{
+			compare = comparing(not_all,all);
+			if(compare.size() == 0)
+				return false;
+			else
+			{	
+				int count = 0;
+				for(int x = 0; x < compare.size();x++)
+				{
+					if(not_all.contains(compare.get(x)))
+						count++;
+				}
+				if(count == compare.size())
+					return false;
+			}
+		}
+		return true;
+	} 
 }	
