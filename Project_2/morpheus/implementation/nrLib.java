@@ -60,6 +60,33 @@ public class nrLib {
 		return test.writeResultSet(crn1,"Monday_Ind1");
 	}
 
+	public int number_of_senior(String crn) throws SQLException
+	{
+		ResultSet crn1 = test. readDatabase("select distinct Banner_ID from class_2016 where Class_Desc = 'Senior' and CRN = '"+crn+"'");
+		List<String> student = test.writeResultSet(crn1,"Banner_ID");
+		return student.size();
+	}
+
+	public int number_of_psenior(String crn, String time, String days) throws SQLException
+	{
+		ResultSet crn1 = test. readDatabase("select distinct Banner_ID from class_2016 where Class_Desc = 'Senior' and CRN = '"+crn+"'");
+		List<String> student = test.writeResultSet(crn1,"Banner_ID");
+		ResultSet class_t;
+		String semester = test.getLatestSemester();
+		int count = 0;
+		for(int x = 0; x < student.size();x++)
+		{
+			if(days.charAt(0) == 'M')
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F' order by Begin_Time");
+			else
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+ "' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' order by Begin_Time");
+			List<String> class_time = test.writeResultSet(class_t, "Begin_Time");
+			if(class_time.contains(time) == false)
+				count++;
+		}
+		return count;
+	}
+
 	public List<String> crn_Exit() throws SQLException
 	{
 		ResultSet crn = test.readDatabase("select distinct CRN from class_2016");

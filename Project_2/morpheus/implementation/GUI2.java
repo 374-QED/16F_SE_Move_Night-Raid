@@ -14,6 +14,7 @@ import java.awt.event.*;
 public class GUI2{
 	private static nrLib test = new nrLib();
 	private static GUI main = new GUI();
+	private static GUI3 main2 = new GUI3();
 	private List<String> room_solve;
 	private JTextField list3;
 	private JComboBox<String> list2;
@@ -128,7 +129,7 @@ public class GUI2{
 		    }
 		    else if(test.error_term(crn,days) && senior == "YES")
 		    {
-
+		    	main2.start3(crn,days);
 		    }
 		    else{
 		    	System.out.println("There are no available time on \""+days+"\" for this CRN = "+crn+". ");
