@@ -130,7 +130,7 @@ public class nrLib {
 		ResultSet crn = test.readDatabase("select distinct CRN from class_2016");
 		return test.writeResultSet(crn,"CRN");
 	}
-	public List<String> getStudentFromCourse_CRN(int crn) throws SQLException
+	public static List<String> getStudentFromCourse_CRN(String crn) throws SQLException
 	{
 		// CC = 3
 		ResultSet student = test.readDatabase("select Banner_ID from class_2016 where CRN = '"+ crn + "'");
