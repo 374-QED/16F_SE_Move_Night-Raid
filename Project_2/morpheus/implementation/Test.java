@@ -16,9 +16,9 @@ class Test {
 			SQLiteAccess sqlite = new SQLiteAccess();
 			nrLib lib = new nrLib();
 
-			List<String> temp = lib.comparing(nrLib.findTime("10902", "MWF",1), lib.getAllStartTime("MWF"));
+			List<Integer> temp = lib.numConflicts("MWF", "10902");
 			System.out.println(temp);
-			System.out.println(lib.comparing(lib.notavailableRoom("1200", "MWF"), lib.allRoom()));
+			// System.out.println(lib.comparing(lib.notavailableRoom("1200", "MWF"), lib.allRoom()));
 
 		}
 		/*

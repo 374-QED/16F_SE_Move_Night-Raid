@@ -143,6 +143,11 @@ public class SQLiteAccess {
             return resultSet.getString(column_set);
     }
 
+    public int writeInt(ResultSet resultSet, String column_set) throws SQLException {
+            //CC = 2
+            return resultSet.getInt(column_set);
+    }
+
     // You need to close the resultSet
     private void close() {
         // CC = 4

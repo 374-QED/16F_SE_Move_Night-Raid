@@ -149,7 +149,7 @@ public class nrLib {
 	    return test.writeResultSet(test.readDatabase("select distinct Subject_Code, Course_Number, Room_Code1 from class_2016 where Term_Code = '"+ test.getLatestSemester()+"' and Subject_Code = '" + crs[0] + "' and Course_Number = '" + crs[1] + "'"), "Room_Code1");
 
 	}
-	public List<String> getAllStartTime(String data) throws SQLException
+	public static List<String> getAllStartTime(String data) throws SQLException
     {
     	//retrive all time either on "MWF" or "TR"
     	// CC = 5
@@ -219,6 +219,8 @@ public class nrLib {
    		room = test.writeResultSet(temp,"Room_Code1");
    		return room; 	
     }	
+
+
 	public static List<String> findTime(String crn, String date, int priority) throws SQLException
 	{
 		//CC = 8
@@ -253,6 +255,7 @@ public class nrLib {
 		}
 		return dist_time;
 	}
+
 	public boolean error_term(String crn, String days) throws SQLException
 	{
 		List<String> not_all = findTime(crn,days,0);
@@ -297,4 +300,29 @@ public class nrLib {
 		}
 		return true;
 	} 
+
+	public static List<Integer> numConflicts(String days, String crn) throws Exception{
+
+		List<Integer> num = new ArrayList<>();
+		List<String> allTime = getAllStartTime(days);
+		List<String> students = getStudentFromCourse_CRN(crn);
+
+		for(int i = 0; i < allTime.size();i++){
+
+			num.add(0);
+		}
+
+		for(int i = 0; i < allTime.size();i++){
+
+			for(int j = 0; j < students.size();j++){	
+			
+				if(days.charAt(0) == 'M'){
+					num.set(i, num.get(i) + test.writeInt(test.readDatabase("select count(*) from class_2016 where Banner_id = '"+students.get(j)+"' and Begin_Time = '"+allTime.get(i)+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W' and Friday_Ind1 = 'F'"), "count(*)"));
+				} else {
+					num.set(i, num.get(i) + test.writeInt(test.readDatabase("select count(*) from class_2016 where Banner_id = '"+students.get(j)+"' and Begin_Time = '"+allTime.get(i)+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R'"), "count(*)"));
+				}
+			}
+		}
+		return num;
+	}
 }	
