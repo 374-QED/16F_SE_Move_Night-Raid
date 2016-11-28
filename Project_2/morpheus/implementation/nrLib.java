@@ -9,7 +9,19 @@ import java.sql.*;
 
 public class nrLib {
 	private static SQLiteAccess test = new SQLiteAccess();
-
+	public String get_first(String name) throws SQLException
+	{
+		String temporary = "";
+		int t = 0;
+		for(int x = 0; x < name.length();x++)
+		{
+			if((name.charAt(x) != ' ') && (t == 0))
+				temporary = temporary + name.charAt(x);
+			else
+				t = x;
+		}
+		return temporary;
+	}
 	public static String findStudentname(String student_id) throws SQLException
 	{
 		// CC = 6
@@ -67,6 +79,13 @@ public class nrLib {
 		return student.size();
 	}
 
+	public int number_of_student(String crn) throws SQLException
+	{
+		ResultSet crn1 = test. readDatabase("select distinct Banner_ID from class_2016 where CRN = '"+crn+"'");
+		List<String> student = test.writeResultSet(crn1,"Banner_ID");
+		return student.size();
+	}
+
 	public int number_of_psenior(String crn, String time, String days) throws SQLException
 	{
 		ResultSet crn1 = test. readDatabase("select distinct Banner_ID from class_2016 where Class_Desc = 'Senior' and CRN = '"+crn+"'");
@@ -87,6 +106,25 @@ public class nrLib {
 		return count;
 	}
 
+	public int number_of_pstudent(String crn, String time, String days) throws SQLException
+	{
+		ResultSet crn1 = test. readDatabase("select distinct Banner_ID from class_2016 where CRN = '"+crn+"'");
+		List<String> student = test.writeResultSet(crn1,"Banner_ID");
+		ResultSet class_t;
+		String semester = test.getLatestSemester();
+		int count = 0;
+		for(int x = 0; x < student.size();x++)
+		{
+			if(days.charAt(0) == 'M')
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F' order by Begin_Time");
+			else
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+ "' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' order by Begin_Time");
+			List<String> class_time = test.writeResultSet(class_t, "Begin_Time");
+			if(class_time.contains(time) == false)
+				count++;
+		}
+		return count;
+	}
 	public List<String> crn_Exit() throws SQLException
 	{
 		ResultSet crn = test.readDatabase("select distinct CRN from class_2016");
@@ -151,14 +189,13 @@ public class nrLib {
     	if(data2.size()==0)
     		return all;
     	List<String> different = new ArrayList<String>();
-    	for(int x = 0; x < data2.size();x++)
+    	for(int x = 0; x < all.size();x++)
     	{
-    		if(all.contains(data2.get(x))==false)
+    		if(data2.contains(all.get(x))==false)
     		{
-    			different.add(data2.get(x));
+    			different.add(all.get(x));
     		}
     	}
-    	
     	return different;
     }
     public List<String> allRoom() throws SQLException

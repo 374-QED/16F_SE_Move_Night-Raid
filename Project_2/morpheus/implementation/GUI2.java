@@ -24,6 +24,7 @@ public class GUI2{
 	private String hold_crn;
 	private GridBagConstraints right;
 	private String hold_days;
+	private String hold_time;
 
 	public void start2(String crn, String days, String senior)
 	{
@@ -70,7 +71,6 @@ public class GUI2{
 		        //Create the combo box, select item at index 4.
 		        //Indices start at 0, so 4 specifies the pig.
 		        list1 = new JComboBox<>(day_select);
-		        list1.setSelectedIndex(0);
 		        list1.setEditable(false);
 		        list1.addActionListener(new ConvertActListener());
 		        room_solve = test.comparingRoom(test.allRoom(),test.notavailableRoom(solution.get(0),days));
@@ -90,7 +90,6 @@ public class GUI2{
 			        	senior_select[x] = temp;
 			        }
 			        list2 = new JComboBox<>(senior_select);
-			        list2.setSelectedIndex(0);
 			        list2.setEditable(false);
 		       	}
 
@@ -147,8 +146,10 @@ public class GUI2{
 
         	try{
  			hold_crn = (String)list1.getSelectedItem();
+ 			
  			room_solve = test.comparingRoom(test.allRoom(),test.notavailableRoom(hold_crn,hold_days));
-		       	
+		       	list2.removeAllItems();
+		    	panel.remove(list2);
 		       	if(room_solve.size() == 0)
 		       	{
 		       		list3 = new JTextField(20);
@@ -164,9 +165,9 @@ public class GUI2{
 			        	senior_select[x] = temp;
 			        }
 			        list2 = new JComboBox<>(senior_select);
-			        list2.setSelectedIndex(0);
 			        list2.setEditable(false);
 		       	}
+		       	hold_time = (String)list2.getSelectedItem();
 		       	if(room_solve.size() == 0)
 		        	panel.add(list3, right);
 		        else
@@ -177,7 +178,7 @@ public class GUI2{
         	}   
         }
     }
-     class ConvertBtnListener implements ActionListener {         //Note 6
+    class ConvertBtnListener implements ActionListener {         //Note 6
         public void actionPerformed(ActionEvent e) {
         	String t = (String)list1.getSelectedItem();
         	String r = (String)list2.getSelectedItem();
