@@ -325,4 +325,17 @@ public class nrLib {
 		}
 		return num;
 	}
+
+
+	public static void printList(List l) throws Exception{
+
+		for(int i = 0; i < l.size(); i++){
+			System.out.println(l.get(i));
+		}
+		System.out.print("\n");
+	}
+
+	public static void userInput() throws Exception{
+
+	}
 }	
