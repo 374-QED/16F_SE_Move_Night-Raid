@@ -77,12 +77,13 @@ class ClassMove {
 			if(t_avail.isEmpty()==false)
 			{
 				System.out.println("Choose one of the following available times in which to move the class to:");
-				System.out.println(t_avail);
+				nrLib.printList(t_avail);
 				String time = user_input.next();
 
 				temp = nr.comparing(nr.notavailableRoom(time, days), nr.allRoom());
 
-				System.out.println("Choose one of the following rooms: \n" + temp);
+				System.out.println("Choose one of the following rooms: \n");
+				nrLib.printList(temp);
 				input = user_input.next();
 
 				System.out.println("\n\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+input+" room of the MBB\n\n\n");
