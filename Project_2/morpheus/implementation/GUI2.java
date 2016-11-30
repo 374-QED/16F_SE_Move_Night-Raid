@@ -15,6 +15,7 @@ public class GUI2{
 	private static nrLib test = new nrLib();
 	private static GUI main = new GUI();
 	private static GUI3 main2 = new GUI3();
+	private static GUI4 screen = new GUI4();
 	private List<String> room_solve;
 	private JTextField list3;
 	private JComboBox<String> list2;
@@ -25,7 +26,8 @@ public class GUI2{
 	private GridBagConstraints right;
 	private String hold_days;
 	private String hold_time;
-
+	private String temp_crn;
+	private JFrame frame;
 	public void start2(String crn, String days, String senior)
 	{
 		try{
@@ -50,9 +52,10 @@ public class GUI2{
 			if(test.error_term(crn,days) && senior == "NO")
 			{
 				hold_days = days;
+				temp_crn = crn;
 				List<String> solution = test.comparing(test.findTime(crn,days,0),test.getAllStartTime(days));
 		        System.out.println(solution);
-		        JFrame frame = new JFrame();
+		        frame = new JFrame();
 		        panel = new JPanel();
 		        JButton madLibButton = new JButton("Enter");
 		        madLibButton.addActionListener(new ConvertBtnListener()); //Note 5
@@ -183,6 +186,9 @@ public class GUI2{
         	String t = (String)list1.getSelectedItem();
         	String r = (String)list2.getSelectedItem();
         	System.out.println(t+" "+r);
+        	frame.dispose();
+	        screen.start4(temp_crn, t, r, "YES",hold_days);
+
         }
     }
 }

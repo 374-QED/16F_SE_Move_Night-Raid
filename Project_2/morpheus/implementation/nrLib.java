@@ -52,7 +52,19 @@ public class nrLib {
 		id  = test.writeResultSet(student_id,"Banner_id");
 		return id.get(0); 
 	}
-	
+	public boolean in_this_class(String student, String time1, String date) throws SQLException
+	{
+		String semester = test.getLatestSemester();
+		ResultSet class_t;
+		if(date.charAt(0) == 'M')
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student+"' and Term_Code = '"+semester+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W'and Friday_Ind1 = 'F' order by Begin_Time");
+			else
+				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student+ "' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' order by Begin_Time");
+		List<String> time = test.writeResultSet(class_t,"Begin_Time");
+		if(time.contains(time1))
+			return false;
+		return true;
+	}
 	public List<String> getStudentFromCourse(String course) throws SQLException
 	{
 		// CC = 3
@@ -77,6 +89,16 @@ public class nrLib {
 		ResultSet crn1 = test. readDatabase("select distinct Banner_ID from class_2016 where Class_Desc = 'Senior' and CRN = '"+crn+"'");
 		List<String> student = test.writeResultSet(crn1,"Banner_ID");
 		return student.size();
+	}
+
+	public String classification(String student_id) throws SQLException
+	{
+		String semester = test.getLatestSemester();
+		ResultSet class_c = test.readDatabase("select distinct Class_Desc from class_2016 where Banner_ID = '"+student_id+"' and Term_Code = '"+semester+"'");
+		List<String> cool = test.writeResultSet(class_c,"Class_Desc");
+		if(cool.size() == 0)
+			return "NO CLASSIFICATION";
+		return cool.get(0);
 	}
 
 	public int number_of_student(String crn) throws SQLException
@@ -133,7 +155,7 @@ public class nrLib {
 	public static List<String> getStudentFromCourse_CRN(String crn) throws SQLException
 	{
 		// CC = 3
-		ResultSet student = test.readDatabase("select Banner_ID from class_2016 where CRN = '"+ crn + "'");
+		ResultSet student = test.readDatabase("select Banner_ID from class_2016 where CRN = '"+ crn + "' order by Banner_ID");
 		return test.writeResultSet(student,"Banner_ID");
 	}
 

@@ -13,24 +13,28 @@ import java.awt.event.*;
 
 public class GUI3{
 	private static nrLib test = new nrLib();
+	private static GUI4 screen = new GUI4();
 	private JTextField list3;
 	private JComboBox<String> list2;
 	private JComboBox<String> list1;
 	private String[] senior_select;
 	List<String> room_solve1;
 	private String hold_crn;
+	private String temp_crn;
 	private GridBagConstraints right;
 	private String hold_days;
 	private JPanel panel;
 	private String hold_time;
+	JFrame frame;
 	public void start3(String crn, String days)
 	{
 		try{
 			if(test.error_term(crn,days))
 			{
+				temp_crn = crn;
 				hold_days = days;
 				List<String> all = test.getAllStartTime(days);
-				JFrame frame = new JFrame();
+				frame = new JFrame();
 				panel = new JPanel();
 				JButton madLibButton = new JButton("Enter");
 				madLibButton.addActionListener(new ConvertBtnListener()); //Note 5
@@ -162,6 +166,9 @@ public class GUI3{
 	        	String r = (String)list2.getSelectedItem();
 	        	t = test.get_first(t);
 	        	System.out.println(t+" "+r);
+	        	frame.dispose();
+	        	screen.start4(temp_crn, t, r, "YES",hold_days);
+
         	}
         	catch(SQLException ex)
         	{
