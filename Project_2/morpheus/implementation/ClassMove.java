@@ -19,13 +19,13 @@ class ClassMove {
 	}
 
 	public static void printContinue(){
-		System.out.print("Press \"Enter\" to continue...");
-		newInput.nextLine();
+		System.out.print("\nPress \"Enter\" to continue...");
 		newInput.nextLine();
 	}
 
 	public static String input(String input){
-		if(input.toUpperCase().equals("QUIT")){
+		input = input.toUpperCase();
+		if(input.equals("QUIT")){
 			System.exit(0);
 		}
 		return input;
@@ -38,9 +38,11 @@ class ClassMove {
 		nrLib nr = new nrLib();
 
 		List<String> temp;
-		String input;
+		String input="";
 		boolean go = true;
 		String crn="";
+		String days="";
+		String time="";
 
 		while(true)
 		{
@@ -59,63 +61,85 @@ class ClassMove {
 				if(temp.isEmpty())
 				{
 					System.out.println("\nError: "+crn+" does not seem to be a valid CRN.");
-					System.out.print("Press \"Enter\" to continue...");
-					user_input.nextLine();
-					user_input.nextLine();
+					printContinue();
 				}
 				else
 					go = !go;
 			}
-			go = go;
+			go = !go;
 
-			System.out.print("\033[2J\033[1;1H");
-			System.out.println("Which days would you like to move the class to? \"MWF\" or \"TR\" \n");
-
-			String days = user_input.next();
-			days = days.toUpperCase();
-			if(days.contains("QUIT"))
-			{
-				break;
+			while(go){	
+				System.out.print("\033[2J\033[1;1H");
+				System.out.println("Which days would you like to move the class to? \"MWF\" or \"TR\" \n");
+				days = input(user_input.next());
+				if(days.equals("MWF") || days.equals("TR")){
+					go = !go;
+				} else{
+					System.out.println("\nError: Invalid days set. Please choose \"MWF\" or \"TR\".");
+					printContinue();
+				}
 			}
+			go = !go;
 
 			List<String> t_avail = nr.comparing(nr.findTime(crn, days,0), nr.getAllStartTime(days));
 			//System.out.println(t_avail);
 			
 			if(t_avail.isEmpty()) {
 
-				System.out.print("\033[2J\033[1;1H");
-				System.out.println("The class you want to move has time conflicts with all times.\nDo you want to prioritize Seniors? Yes or No? \n");
-				input = user_input.next();
-				input = input.toUpperCase();
-				if(input.equals("YES")) {
-
-					t_avail = nr.comparing(nr.findTime(crn, days,1), nr.getAllStartTime(days));
-				}
-				/*
-				if(input.equals("NO")) {
-
-					System.out.println("\nDo you want to prioritize Juniors? Yes or No?");
-					input = user_input.next();
-					input = input.toUpperCase();
+				while(go){	
+					System.out.print("\033[2J\033[1;1H");
+					System.out.println("The class you want to move has time conflicts with all times.\nDo you want to prioritize Seniors? Yes or No? \n");
+					input = input(user_input.next());
 					if(input.equals("YES")) {
-						t_avail = nr.comparing(nr.findTime(crn, days,2), nr.getAllStartTime(days));
+
+						t_avail = nr.comparing(nr.findTime(crn, days,1), nr.getAllStartTime(days));
+						go = !go;
+					}
+					else if(input.equals("NO")){
+						// Gonna do something later... maybe
+						go = !go;
+					}
+					else{
+						System.out.println("\nError: Invalid input. Please type \"YES\" or \"NO\".");
+						printContinue();
 					}
 				}
-				*/
+				go = !go;
+				
 			}
-			if(t_avail.isEmpty()==false)
+			if(!t_avail.isEmpty())
 			{
-				System.out.print("\033[2J\033[1;1H");
-				System.out.println("Choose one of the following available times in which to move the class to:\n");
-				nrLib.printList(t_avail);
-				String time = user_input.next();
+				while(go){	
+					System.out.print("\033[2J\033[1;1H");
+					System.out.println("Choose one of the following available times in which to move the class to:\n");
+					nrLib.printList(t_avail);
+					time = input(user_input.next());
+
+					if(t_avail.contains(time)){
+						go = !go;
+					}
+					else{
+						System.out.println("\nError: "+time+" is not in the available time options.");
+						printContinue();
+					}
+				}
+				go = !go;
 
 				temp = nr.comparing(nr.notavailableRoom(time, days), nr.allRoom());
 
-				System.out.print("\033[2J\033[1;1H");
-				System.out.println("Choose one of the following rooms: \n");
-				nrLib.printList(temp);
-				input = user_input.next();
+				while(go){	
+					System.out.print("\033[2J\033[1;1H");
+					System.out.println("Choose one of the following rooms: \n");
+					nrLib.printList(temp);
+					input = input(user_input.next());
+					if(temp.contains(input)){
+						go = !go;
+					}else{
+						System.out.println("\nError: "+input+" is not one of the available rooms.");
+						printContinue();
+					}
+				}
+				go = !go;
 
 				System.out.print("\033[2J\033[1;1H");
 				System.out.println("\n\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+input+" room of the MBB\n\n\n");
@@ -126,8 +150,8 @@ class ClassMove {
 
 
 			// System.out.print("Press \"Enter\" to continue...");
-			// user_input.nextLine();
 			printContinue();
+			user_input.nextLine();
 		}
 		
 	}
