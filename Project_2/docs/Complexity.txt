@@ -1,13 +1,29 @@
 nrLib:
+compare_room() CC = 3
+contain_senior() CC = 3
+get_first() CC = 2
 findStudentname() CC = 6
 findStudent() CC = 3
+in_this_class() CC = 3
 getStudentFromCourse() CC = 3
+crn_time() CC = 1 
+crn_day() CC = 1
+number_of_senior() CC = 2
+number_of_pstudent() CC = 3
+crn_exit() CC = 1
+getStudentFromCourse_CRN() CC = 1
+getStudentsClasses() C = 1
+classification() CC = 2
+number_of_psenior() CC = 3
 getDataFromCourse() CC = 2
 getAllStartTime() CC = 5
 comparing() CC = 3
+comparintRoom() CC = 4
 allRoom() CC = 2
 notavailableRoom() CC = 5
 findTime() CC = 8
+error_term() CC = 9
+numConflicts() CC = 4
 
 SQLiteAccess:
 parseCourse() CC = 2
@@ -19,9 +35,31 @@ writeResultSet() CC = 3
 writeString() CC = 2
 close() CC = 4
 
+GUI:
+start() CC = 3
+actionPerformed() = 3
+main() CC = 1
+
+GUI2: 
+start2() CC = 7
+A.actionPerformed() = 5
+B.actionPerformed() = 2
+
+
+GUI3:
+start3() CC = 8
+A.actionPerformed() CC = 6
+B.actionPerformed() CC = 3
+
+GUI4:
+start4() CC = 4
+B.actionPerformed() CC = 1
+
+
 CSVparser:
 parseCourse() CC = 2
 parsePreReq() CC = 5
+parse_room() CC = 5
 
 
 Average Complexity: 3.578947368

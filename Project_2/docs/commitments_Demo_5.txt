@@ -2,5 +2,7 @@ commitments_Demo_5.txt
 
 Finish project:
 	>fully working GUI
-	>Completion of Project baics
+		- HAVE REGULAR UI DONE
+		- HAVE GUI DONE
+	>Completion of Project basics
 	>Documenttion done

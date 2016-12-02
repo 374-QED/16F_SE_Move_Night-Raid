@@ -1,0 +1,7 @@
+How to make GUI work on your computer:
+
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+ 
+You need to download jdk SE, pick the 111, and find your product
+
+make sure your computer can run Java.
