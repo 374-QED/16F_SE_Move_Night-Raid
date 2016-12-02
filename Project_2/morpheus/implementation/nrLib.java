@@ -19,7 +19,7 @@ public class nrLib {
 			return false;
 		String temp1 = room_enroll.get(0);
 		String temp2 = room_total.get(0);
-
+		//System.out.println(temp1+" > "+temp2+" = "+room1);
 		if(Integer.parseInt(temp1) > Integer.parseInt(temp2))
 			return false;
 		return true;

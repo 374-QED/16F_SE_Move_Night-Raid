@@ -135,11 +135,16 @@ public class GUI3{
         	try{
  			hold_crn = (String)list1.getSelectedItem();
  			hold_crn = test.get_first(hold_crn);
- 			room_solve1 = test.comparingRoom(test.allRoom(),test.notavailableRoom(hold_crn,hold_days));
+ 			room_solve1 = test.comparingRoom(test.allRoom(),test.notavailableRoom(temp_crn,hold_days));
+ 			//System.out.print(temp_crn);
 		    for(int x = 0; x < room_solve1.size();x++)
 		    {
-		       	if(test.compare_room(room_solve1.get(x),hold_crn) == false)
+		       	if(test.compare_room(room_solve1.get(x),temp_crn) == false)
+		       	{
+		       		//System.out.println(room_solve1.get(x));
 		       		room_solve1.remove(x);
+
+		       	}
 		     }
 		    //System.out.println(room_solve1);
 		    	list2.removeAllItems();

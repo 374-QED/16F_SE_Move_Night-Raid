@@ -82,6 +82,7 @@ public class GUI2{
 		       		if(test.compare_room(room_solve.get(x),crn) == false)
 		       			room_solve.remove(x);
 		       	}
+	
 		       	if(room_solve.size() == 0)
 		       	{
 		       		list3 = new JTextField(20);
