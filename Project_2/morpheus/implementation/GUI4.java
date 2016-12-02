@@ -48,25 +48,35 @@ public class GUI4{
 			JLabel[] verbLabel = new JLabel[test.number_of_student(temp_crn)];
 			JLabel[] adjLabel = new JLabel[test.number_of_student(temp_crn)];
 			List<String> student = test.getStudentFromCourse_CRN(temp_crn);
+			int number_of_conflict = 0;
 			for(int x = 0; x < test.number_of_student(temp_crn); x++)
 			{
-				/*
-				if(test.in_this_class(student.get(x),time,days))
+
+				if((test.in_this_class(student.get(x),time,days) == false))
 				{
-					verbLabel[x] = new JLabel("");
-					adjLabel[x] = new JLabel(student.get(x)+" "+test.findStudentname(student.get(x))+" "+test.classification(student.get(x)));
-					panel.add(verbLabel[x], left);
-					panel.add(adjLabel[x], right);
+					number_of_conflict++;
 				}
-				else
-				*/ 
-				if(test.in_this_class(student.get(x),time,days) == false)
+			
+			}
+			if(number_of_conflict > 0)
+			{
+				for(int x = 0; x < test.number_of_student(temp_crn); x++)
 				{
-					verbLabel[x] = new JLabel("<html><font color='red'>--TIMECONFLICT--</font></html>");
-					adjLabel[x] = new JLabel(student.get(x)+" "+test.findStudentname(student.get(x))+" "+test.classification(student.get(x)));
-					panel.add(verbLabel[x], left);
-					panel.add(adjLabel[x], right);
-				} 
+
+					if((test.in_this_class(student.get(x),time,days) == false))
+					{
+						verbLabel[x] = new JLabel("<html><font color='red'>--TIMECONFLICT--</font></html>");
+						adjLabel[x] = new JLabel(student.get(x)+" "+test.findStudentname(student.get(x))+" "+test.classification(student.get(x)));
+						panel.add(verbLabel[x], left);
+						panel.add(adjLabel[x], right);
+					}
+				
+				}
+			}
+			else
+			{
+				JLabel cool = new JLabel("<html><font color='red'>--NO TIME CONFLICT IN THIS CLASS--</font></html>");
+				panel.add(cool, right);
 			}
 			/*
 			panel.add(verbLabel1, left);
