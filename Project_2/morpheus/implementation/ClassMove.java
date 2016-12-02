@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-class ClassMove {
+public class ClassMove {
 
 	private static Scanner newInput = new Scanner(System.in);
 	public static void clearScreen(int n){
