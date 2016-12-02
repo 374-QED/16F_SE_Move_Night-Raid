@@ -1,1 +1,14 @@
 README:
+
+*** If there are issues with GUI, Open up Install_GUI and follow the instructions to download the correct software ***
+
+To run Program:
+
+Open up CMD.
+cd into Project 2
+cd into morpheus
+run go.bat for your system (windows - go.bat, Mac - runGUI_MacOS)
+
+Example:
+
+	I.E. cd Project_2, cd morpheus, go.bat
