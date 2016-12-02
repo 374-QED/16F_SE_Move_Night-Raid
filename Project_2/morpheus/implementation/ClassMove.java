@@ -31,6 +31,14 @@ class ClassMove {
 		return input;
 	}
 
+	public static void printData(String crn, String days, String time, String room) throws Exception{
+		System.out.println("CRN: "+crn);
+		System.out.println("Class: "+ (crn.equals("") ? "" : nrLib.crnToClass(crn)));
+		System.out.println("Days: "+days);
+		System.out.println("Time: "+time);
+		System.out.println("Room: "+room+"\n\n");
+	}
+
 	public static void main(String [] args) throws Exception{
 
 		SQLiteAccess sqlite = new SQLiteAccess();
@@ -43,13 +51,26 @@ class ClassMove {
 		String crn="";
 		String days="";
 		String time="";
+		String room="";
+		List<Integer> numCon=null;
+		List<String> student;
 
 		while(true)
 		{
+			input="";
+			go = true;
+			crn="";
+			days="";
+			time="";
+			room="";
+			numCon=null;
+
+
 			while(go){
 
 				System.out.print("\033[2J\033[1;1H");
-		
+				printData(crn,days,time,room);
+
 				System.out.println("Input the CRN of the class you would like to move or QUIT to stop.");
 				
 				System.out.println("\nExample: \"10902\" \n");
@@ -70,6 +91,7 @@ class ClassMove {
 
 			while(go){	
 				System.out.print("\033[2J\033[1;1H");
+				printData(crn,days,time,room);
 				System.out.println("Which days would you like to move the class to? \"MWF\" or \"TR\" \n");
 				days = input(user_input.next());
 				if(days.equals("MWF") || days.equals("TR")){
@@ -82,12 +104,12 @@ class ClassMove {
 			go = !go;
 
 			List<String> t_avail = nr.comparing(nr.findTime(crn, days,0), nr.getAllStartTime(days));
-			//System.out.println(t_avail);
-			
+
 			if(t_avail.isEmpty()) {
 
 				while(go){	
 					System.out.print("\033[2J\033[1;1H");
+					printData(crn,days,time,room);
 					System.out.println("The class you want to move has time conflicts with all times.\nDo you want to prioritize Seniors? Yes or No? \n");
 					input = input(user_input.next());
 					if(input.equals("YES")) {
@@ -96,7 +118,10 @@ class ClassMove {
 						go = !go;
 					}
 					else if(input.equals("NO")){
-						// Gonna do something later... maybe
+						
+						t_avail = nr.getAllStartTime(days);
+						numCon = nr.numConflicts(days, crn);
+
 						go = !go;
 					}
 					else{
@@ -111,8 +136,16 @@ class ClassMove {
 			{
 				while(go){	
 					System.out.print("\033[2J\033[1;1H");
+					printData(crn,days,time,room);
 					System.out.println("Choose one of the following available times in which to move the class to:\n");
-					nrLib.printList(t_avail);
+					
+					if(numCon != null){
+						System.out.println("times available  |  number of Conflicts\n");
+						nr.printList(t_avail, numCon);
+					} else{
+						nrLib.printList(t_avail);
+					}
+
 					time = input(user_input.next());
 
 					if(t_avail.contains(time)){
@@ -129,20 +162,39 @@ class ClassMove {
 
 				while(go){	
 					System.out.print("\033[2J\033[1;1H");
+					printData(crn,days,time,room);
 					System.out.println("Choose one of the following rooms: \n");
-					nrLib.printList(temp);
-					input = input(user_input.next());
-					if(temp.contains(input)){
+					List<Integer> rem = new ArrayList<Integer>();
+					for(int x = 0; x < temp.size();x++)
+			       	{
+			       		if(!nr.compare_room(temp.get(x),crn))
+			       			temp.remove(x);
+			       	}
+					nr.printList(temp);
+					room = input(user_input.next());
+
+					if(temp.contains(room)){
 						go = !go;
 					}else{
-						System.out.println("\nError: "+input+" is not one of the available rooms.");
+						nr.printList(temp);
+						System.out.println("\nError: "+room+" is not one of the available rooms.");
 						printContinue();
 					}
 				}
 				go = !go;
 
 				System.out.print("\033[2J\033[1;1H");
-				System.out.println("\n\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+input+" room of the MBB\n\n\n");
+				printData(crn,days,time,room);
+				System.out.println("\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+room+" room of the MBB\n\n");
+
+				System.out.println("These are the students (if any) that have time conflict.\n");
+
+				student = nr.getStudentFromCourse_CRN(crn);
+				for(int i = 0; i < student.size();i++){
+					if(!nr.in_this_class(student.get(i), time, days)){
+						System.out.println(nr.classification(student.get(i))+"  "+student.get(i)+"  "+nr.findStudentname(student.get(i)));
+					}
+				}
 			}
 			else
 

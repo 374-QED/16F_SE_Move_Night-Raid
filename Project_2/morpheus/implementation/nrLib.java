@@ -366,7 +366,7 @@ public class nrLib {
 		}
 		for(int i = 0; i < allTime.size();i++){
 
-			for(int j = 0; j < students.size();j++){	
+			for(int j = 0; j < students.size();j++){
 			
 				if(days.charAt(0) == 'M'){
 					num.set(i, num.get(i) + test.writeInt(test.readDatabase("select count(*) from class_2016 where Banner_id = '"+students.get(j)+"' and Begin_Time = '"+allTime.get(i)+"' and Monday_Ind1 = 'M' and Wednesday_Ind1 = 'W' and Friday_Ind1 = 'F'"), "count(*)"));
@@ -378,6 +378,11 @@ public class nrLib {
 		return num;
 	}
 
+	public static String crnToClass(String crn) throws Exception{
+		ResultSet rs = test.readDatabase("select * from class_2016 where CRN='"+crn+"'");
+
+		return test.writeString(rs, "Subject_Code") + test.writeString(rs, "Course_Number");
+	}
 
 	public static void printList(List l) throws Exception{
 
@@ -386,8 +391,13 @@ public class nrLib {
 		}
 		System.out.print("\n");
 	}
+	
+	public static void printList(List l, List m) throws Exception{
 
-	public static void userInput() throws Exception{
-
+		for(int i = 0; i < l.size(); i++){
+			System.out.println(l.get(i)+"   |   "+m.get(i));
+		}
+		System.out.print("\n");
 	}
+
 }	
