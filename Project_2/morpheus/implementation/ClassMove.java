@@ -25,6 +25,8 @@ public class ClassMove {
 
 	public static String input(String input){
 		input = input.toUpperCase();
+		input = input.replace("'", "");
+		input = input.replace("\"", "");
 		if(input.equals("QUIT")){
 			System.exit(0);
 		}
@@ -83,6 +85,7 @@ public class ClassMove {
 				{
 					System.out.println("\nError: "+crn+" does not seem to be a valid CRN.");
 					printContinue();
+					crn="";
 				}
 				else
 					go = !go;
@@ -164,19 +167,19 @@ public class ClassMove {
 					System.out.print("\033[2J\033[1;1H");
 					printData(crn,days,time,room);
 					System.out.println("Choose one of the following rooms: \n");
-					List<Integer> rem = new ArrayList<Integer>();
+
 					for(int x = 0; x < temp.size();x++)
 			       	{
 			       		if(!nr.compare_room(temp.get(x),crn))
 			       			temp.remove(x);
 			       	}
+
 					nr.printList(temp);
 					room = input(user_input.next());
 
 					if(temp.contains(room)){
 						go = !go;
 					}else{
-						nr.printList(temp);
 						System.out.println("\nError: "+room+" is not one of the available rooms.");
 						printContinue();
 					}
