@@ -9,6 +9,33 @@ import java.sql.*;
 
 public class nrLib {
 	private static SQLiteAccess test = new SQLiteAccess();
+	private static CSVparser find = new CSVparser();
+	public boolean compare_room(String room1, String crn) throws SQLException
+	{
+		ResultSet room = test.readDatabase("select distinct Section_Max_Enrollment from class_2016 where crn = '"+crn+"'");
+		List<String> room_enroll = test.writeResultSet(room, "Section_Max_Enrollment");
+		List<String> room_total = find.parse_room(room1);
+		if(room_total.size() == 0 || room_enroll.size() == 0)
+			return false;
+		String temp1 = room_enroll.get(0);
+		String temp2 = room_total.get(0);
+
+		if(Integer.parseInt(temp1) > Integer.parseInt(temp2))
+			return false;
+		return true;
+
+	}
+	public boolean contain_senior(String crn) throws SQLException
+	{
+		List<String> all = crn_Exit();
+		if(all.contains(crn) == false)
+			return false;
+		ResultSet result = test.readDatabase("Select distinct Banner_id from class_2016 where CRN = '"+crn+"' and Class_Desc = 'Senior'");
+		List<String> senior = test.writeResultSet(result,"Banner_id");
+		if(senior.size() == 0)
+			return false;
+		return true;
+	}
 	public String get_first(String name) throws SQLException
 	{
 		String temporary = "";
@@ -38,7 +65,7 @@ public class nrLib {
 		student = test.readDatabase("select distinct First_name, Middle_name, Last_name from class_2016 where Banner_Id = '"+student_id+"'");		
 		last_name = test.writeResultSet(student, "Last_name");
 		//System.out.println(first_name);
-		full_name = first_name.get(0) + " " + middle_name.get(0) + " " + last_name.get(0);
+		full_name = last_name.get(0) +", "+ first_name.get(0) + " " + middle_name.get(0);
 		return full_name;
 	}
 	public static String findStudent(String name) throws SQLException
@@ -155,7 +182,7 @@ public class nrLib {
 	public static List<String> getStudentFromCourse_CRN(String crn) throws SQLException
 	{
 		// CC = 3
-		ResultSet student = test.readDatabase("select Banner_ID from class_2016 where CRN = '"+ crn + "' order by Banner_ID");
+		ResultSet student = test.readDatabase("select Banner_ID from class_2016 where CRN = '"+ crn + "' order by Last_name");
 		return test.writeResultSet(student,"Banner_ID");
 	}
 
@@ -333,7 +360,6 @@ public class nrLib {
 
 			num.add(0);
 		}
-
 		for(int i = 0; i < allTime.size();i++){
 
 			for(int j = 0; j < students.size();j++){	

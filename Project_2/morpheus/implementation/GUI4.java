@@ -13,23 +13,25 @@ import java.awt.event.*;
 
 public class GUI4{
 	private static nrLib test = new nrLib();
+	private static GUI next = new GUI();
+	private JFrame frame;
 	public void start4(String temp_crn,String time, String room, String choice, String days)
 	{
 		try{
 
-			JFrame frame = new JFrame();
+			frame = new JFrame();
 			JPanel panel = new JPanel();
 
-			JLabel title = new JLabel(" You moved this "+temp_crn+" to "+time+" in room "+room+". ");
-			//JLabel verbLabel1 = new JLabel("484323 James White ");
-			//JLabel adjLabel = new JLabel("Junior");
-
-			
+			JLabel title = new JLabel(" You moved this CRN: "+temp_crn+" to "+time+" in room "+room+". ");
+			JButton madLibButton = new JButton("HOME");
+        	madLibButton.addActionListener(new ConvertBtnListener()); //Note 5
 
 			frame.getContentPane().add(BorderLayout.NORTH, title);
-
+			frame.getContentPane().add(BorderLayout.SOUTH, madLibButton);
 			panel.setLayout(new GridBagLayout());
-			panel.setBackground(Color.white);
+			Color purple = new Color(238, 130, 238);
+        	//purple.getHSBColor(0.20f, 1f, 1f);
+        	panel.setBackground(purple);
 			frame.getContentPane().add(panel);
 
 			GridBagConstraints left = new GridBagConstraints();
@@ -39,7 +41,10 @@ public class GUI4{
 			right.weightx = 2.0;
 			right.fill = GridBagConstraints.HORIZONTAL;
 			right.gridwidth = GridBagConstraints.REMAINDER;
-
+			JLabel conflict = new JLabel(" TIME CONFLICT: ");
+			JLabel conflict1 = new JLabel(" Student Information (Banner_ID | Name): ");
+			panel.add(conflict,left);
+			panel.add(conflict1,right);
 			JLabel[] verbLabel = new JLabel[test.number_of_student(temp_crn)];
 			JLabel[] adjLabel = new JLabel[test.number_of_student(temp_crn)];
 			List<String> student = test.getStudentFromCourse_CRN(temp_crn);
@@ -47,8 +52,15 @@ public class GUI4{
 			{
 				if(test.in_this_class(student.get(x),time,days))
 				{
-					verbLabel[x] = new JLabel(student.get(x)+" ");
-					adjLabel[x] = new JLabel(test.findStudentname(student.get(x))+" "+test.classification(student.get(x)));
+					verbLabel[x] = new JLabel("");
+					adjLabel[x] = new JLabel(student.get(x)+" "+test.findStudentname(student.get(x))+" "+test.classification(student.get(x)));
+					panel.add(verbLabel[x], left);
+					panel.add(adjLabel[x], right);
+				}
+				else
+				{
+					verbLabel[x] = new JLabel("<html><font color='red'>--TIMECONFLICT--</font></html>");
+					adjLabel[x] = new JLabel(student.get(x)+" "+test.findStudentname(student.get(x))+" "+test.classification(student.get(x)));
 					panel.add(verbLabel[x], left);
 					panel.add(adjLabel[x], right);
 				} 
@@ -80,7 +92,19 @@ public class GUI4{
 		{
 
 		}
-				
-
 	}
+	class ConvertBtnListener implements ActionListener {         //Note 6
+        public void actionPerformed(ActionEvent e) {
+        	try
+        	{
+            	frame.dispose();
+            	next.start();
+        	}
+        	catch(SQLException ex)
+        	{
+
+        	}
+        }
+    }
+
 }

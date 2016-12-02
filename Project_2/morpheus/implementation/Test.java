@@ -18,6 +18,9 @@ class Test {
 
 			List<Integer> temp = lib.numConflicts("MWF", "10902");
 			System.out.println(temp);
+			CSVparser test = new CSVparser();
+			System.out.println(test.parse_room("115"));
+
 			// System.out.println(lib.comparing(lib.notavailableRoom("1200", "MWF"), lib.allRoom()));
 
 		}

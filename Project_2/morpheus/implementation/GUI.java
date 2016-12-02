@@ -11,7 +11,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-
+//10234 can't move at all
+//10902 can move
+//10300 not senior
+//10235 prioritize senior
 public class GUI{
     private static nrLib test = new nrLib();
     private static GUI2 next = new GUI2();
@@ -28,7 +31,6 @@ public class GUI{
     private JLabel adjLabel;
     private GridBagConstraints left;
     private GridBagConstraints right;
-
     JComboBox<String> list1; 
     JComboBox<String> list2;
     List<String> all;
@@ -65,7 +67,9 @@ public class GUI{
         frame.getContentPane().add(BorderLayout.NORTH, title);
 
         panel.setLayout(new GridBagLayout());
-        panel.setBackground(Color.white);
+        Color purple = new Color(238, 130, 238);
+        //purple.getHSBColor(0.20f, 1f, 1f);
+        panel.setBackground(purple);
         frame.getContentPane().add(panel);
         left = new GridBagConstraints();
         left.anchor = GridBagConstraints.EAST;
@@ -113,7 +117,7 @@ public class GUI{
                 else
                     System.out.println("ERROR! please retype or type your CRN on the first box.");
             }       
-            System.out.println(crn+" "+days+" "+senior);
+            //System.out.println(crn+" "+days+" "+senior);
 
         }
     }

@@ -26,7 +26,47 @@ public class CSVparser {
         String[] parts = {name.substring(0,t),name.substring(t)};
         return parts;
     }
+    public List<String> parse_room(String cool) {
+	// 	// Will parse the csv file, using the "class" argument
+	// 	// to get an array of strings that contains the prerequisites
+	// 	// of the class
+    // CC = 5
+    String csvFile = new File("resources/Class_Rooms.csv").getAbsolutePath();
+        BufferedReader br = null;
+        String line = "";
+        List<String> list = new ArrayList<String>();
 
+        try {
+
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String hold = "";
+                String[] data = line.split(",");
+                if(data[0].replace("\"", "").equals(cool))
+                { 
+                    hold = data[1].replace("\"", "");
+                    hold = hold.replaceAll("^\"|\"$", "");
+                    list.add(hold);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return list;
+        }
+	}
 	public List<String> parsePreReq(String preq) {
 	// 	// Will parse the csv file, using the "class" argument
 	// 	// to get an array of strings that contains the prerequisites

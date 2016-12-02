@@ -63,6 +63,13 @@ public class GUI3{
 				list1.setEditable(false);
 				list1.addActionListener(new ConvertActListener());
 				room_solve1 = test.comparingRoom(test.allRoom(),test.notavailableRoom(test.get_first(day_select1[0]),days));
+				for(int x = 0; x < room_solve1.size();x++)
+		       	{
+		       		if(test.compare_room(room_solve1.get(x),crn) == false)
+		       			room_solve1.remove(x);
+		       	}
+
+
 				//System.out.println(room_solve1);
 				if(room_solve1.size() == 0)
 		       	{
@@ -86,7 +93,9 @@ public class GUI3{
 				frame.getContentPane().add(BorderLayout.NORTH, title);
 
 				panel.setLayout(new GridBagLayout());
-				panel.setBackground(Color.white);
+				Color purple = new Color(238, 130, 238);
+        		//purple.getHSBColor(0.20f, 1f, 1f);
+        		panel.setBackground(purple);
 				frame.getContentPane().add(panel);
 
 				GridBagConstraints left = new GridBagConstraints();
@@ -127,6 +136,11 @@ public class GUI3{
  			hold_crn = (String)list1.getSelectedItem();
  			hold_crn = test.get_first(hold_crn);
  			room_solve1 = test.comparingRoom(test.allRoom(),test.notavailableRoom(hold_crn,hold_days));
+		    for(int x = 0; x < room_solve1.size();x++)
+		    {
+		       	if(test.compare_room(room_solve1.get(x),hold_crn) == false)
+		       		room_solve1.remove(x);
+		     }
 		    //System.out.println(room_solve1);
 		    	list2.removeAllItems();
 		    	panel.remove(list2);
@@ -165,7 +179,7 @@ public class GUI3{
 	        	String t = (String)list1.getSelectedItem();
 	        	String r = (String)list2.getSelectedItem();
 	        	t = test.get_first(t);
-	        	System.out.println(t+" "+r);
+	        	//System.out.println(t+" "+r);
 	        	frame.dispose();
 	        	screen.start4(temp_crn, t, r, "YES",hold_days);
 

@@ -54,7 +54,7 @@ public class GUI2{
 				hold_days = days;
 				temp_crn = crn;
 				List<String> solution = test.comparing(test.findTime(crn,days,0),test.getAllStartTime(days));
-		        System.out.println(solution);
+		        //System.out.println(solution);
 		        frame = new JFrame();
 		        panel = new JPanel();
 		        JButton madLibButton = new JButton("Enter");
@@ -77,7 +77,11 @@ public class GUI2{
 		        list1.setEditable(false);
 		        list1.addActionListener(new ConvertActListener());
 		        room_solve = test.comparingRoom(test.allRoom(),test.notavailableRoom(solution.get(0),days));
-		       	
+		       	for(int x = 0; x < room_solve.size();x++)
+		       	{
+		       		if(test.compare_room(room_solve.get(x),crn) == false)
+		       			room_solve.remove(x);
+		       	}
 		       	if(room_solve.size() == 0)
 		       	{
 		       		list3 = new JTextField(20);
@@ -89,8 +93,8 @@ public class GUI2{
 					senior_select = new String[room_solve.size()];
 			        for(int x = 0; x < room_solve.size();x++)
 			        {
-			        	String temp = "MBB"+room_solve.get(x);
-			        	senior_select[x] = temp;
+				        String temp = "MBB"+room_solve.get(x);
+				        senior_select[x] = temp;
 			        }
 			        list2 = new JComboBox<>(senior_select);
 			        list2.setEditable(false);
@@ -102,7 +106,9 @@ public class GUI2{
 		        frame.getContentPane().add(BorderLayout.NORTH, title);
 
 		        panel.setLayout(new GridBagLayout());
-		        panel.setBackground(Color.white);
+		         Color purple = new Color(238, 130, 238);
+        		//purple.getHSBColor(0.20f, 1f, 1f);
+        		panel.setBackground(purple);
 		        frame.getContentPane().add(panel);
 		        
 		        GridBagConstraints left = new GridBagConstraints();
@@ -129,12 +135,15 @@ public class GUI2{
 		        frame.setResizable(false);
 		        frame.setLocationRelativeTo(null);          // Center window.
 		    }
-		    else if(test.error_term(crn,days) && senior == "YES")
+		    else if(test.error_term(crn,days) && (senior == "YES") && test.contain_senior(crn))
 		    {
 		    	main2.start3(crn,days);
 		    }
 		    else{
-		    	System.out.println("There are no available time on \""+days+"\" for this CRN = "+crn+". ");
+		    	if(test.contain_senior(crn) == false && senior == "YES")
+		    		System.out.println("There are no senior in this CRN = "+crn+". ");
+        		else
+					System.out.println("There are no available time on \""+days+"\" for this CRN = "+crn+". ");
         		main.start();
 		    }
         }    
@@ -151,6 +160,11 @@ public class GUI2{
  			hold_crn = (String)list1.getSelectedItem();
  			
  			room_solve = test.comparingRoom(test.allRoom(),test.notavailableRoom(hold_crn,hold_days));
+		    for(int x = 0; x < room_solve.size();x++)
+		       	{
+		       		if(test.compare_room(room_solve.get(x),hold_crn) == false)
+		       			room_solve.remove(x);
+		       	}
 		       	list2.removeAllItems();
 		    	panel.remove(list2);
 		       	if(room_solve.size() == 0)
@@ -185,7 +199,7 @@ public class GUI2{
         public void actionPerformed(ActionEvent e) {
         	String t = (String)list1.getSelectedItem();
         	String r = (String)list2.getSelectedItem();
-        	System.out.println(t+" "+r);
+        	//System.out.println(t+" "+r);
         	frame.dispose();
 	        screen.start4(temp_crn, t, r, "YES",hold_days);
 
