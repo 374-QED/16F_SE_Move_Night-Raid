@@ -123,7 +123,7 @@ public class GUI{
     }
 
     public static void main(String[] args) throws SQLException{
-        System.out.print("\033[2J\033[1;1H");
+        //System.out.print("\033[2J\033[1;1H");
         GUI main = new GUI();
         main.start();
     }

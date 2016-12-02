@@ -49,7 +49,7 @@ public class GUI2{
 			System.out.println("Some: "+room1);
 			System.out.println("Compare: "+test.comparingRoom(room,room1));
 			*/
-			if(test.error_term(crn,days) && senior == "NO")
+			if(test.error_term(crn,days,senior) && senior == "NO")
 			{
 				hold_days = days;
 				temp_crn = crn;
@@ -135,7 +135,7 @@ public class GUI2{
 		        frame.setResizable(false);
 		        frame.setLocationRelativeTo(null);          // Center window.
 		    }
-		    else if(test.error_term(crn,days) && (senior == "YES") && test.contain_senior(crn))
+		    else if(test.error_term(crn,days,senior) && (senior == "YES") && test.contain_senior(crn))
 		    {
 		    	main2.start3(crn,days);
 		    }

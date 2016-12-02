@@ -29,7 +29,7 @@ public class GUI3{
 	public void start3(String crn, String days)
 	{
 		try{
-			if(test.error_term(crn,days))
+			if(test.error_term(crn,days,"YES"))
 			{
 				temp_crn = crn;
 				hold_days = days;

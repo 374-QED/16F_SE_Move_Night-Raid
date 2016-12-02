@@ -295,6 +295,7 @@ public class nrLib {
 			else
 				class_t = test.readDatabase("select distinct Begin_Time from class_2016 where Banner_id = '"+student.get(x)+ "' and Term_Code = '"+semester+"' and Tuesday_Ind1 = 'T' and Thursday_Ind1 = 'R' order by Begin_Time");
 			List<String> class_time = test.writeResultSet(class_t, "Begin_Time");
+			//System.out.println(class_time);
 			for(int y = 0; y < class_time.size();y++)
 			{
 				if(dist_time.contains(class_time.get(y))==false)
@@ -305,9 +306,12 @@ public class nrLib {
 		return dist_time;
 	}
 
-	public boolean error_term(String crn, String days) throws SQLException
+	public boolean error_term(String crn, String days,String senior) throws SQLException
 	{
-		List<String> not_all = findTime(crn,days,0);
+		int number = 0;
+		if(senior == "YES")
+			number = 1;
+		List<String> not_all = findTime(crn,days,number);
 		List<String> all = getAllStartTime(days);
 		List<String> single = crn_day(crn);
 		List<String> single_t = crn_time(crn);
