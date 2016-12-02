@@ -53,6 +53,7 @@ class ClassMove {
 		String time="";
 		String room="";
 		List<Integer> numCon=null;
+		List<String> student;
 
 		while(true)
 		{
@@ -69,7 +70,7 @@ class ClassMove {
 
 				System.out.print("\033[2J\033[1;1H");
 				printData(crn,days,time,room);
-						
+
 				System.out.println("Input the CRN of the class you would like to move or QUIT to stop.");
 				
 				System.out.println("\nExample: \"10902\" \n");
@@ -184,7 +185,16 @@ class ClassMove {
 
 				System.out.print("\033[2J\033[1;1H");
 				printData(crn,days,time,room);
-				System.out.println("\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+room+" room of the MBB\n\n\n");
+				System.out.println("\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+room+" room of the MBB\n\n");
+
+				System.out.println("These are the students (if any) that have time conflict.\n");
+
+				student = nr.getStudentFromCourse_CRN(crn);
+				for(int i = 0; i < student.size();i++){
+					if(!nr.in_this_class(student.get(i), time, days)){
+						System.out.println(nr.classification(student.get(i))+"  "+student.get(i)+"  "+nr.findStudentname(student.get(i)));
+					}
+				}
 			}
 			else
 
