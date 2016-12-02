@@ -33,7 +33,7 @@ class ClassMove {
 
 	public static void printData(String crn, String days, String time, String room) throws Exception{
 		System.out.println("CRN: "+crn);
-		System.out.println("Class: "+nrLib.crnToClass(crn));
+		System.out.println("Class: "+ (crn.equals("") ? "" : nrLib.crnToClass(crn)));
 		System.out.println("Days: "+days);
 		System.out.println("Time: "+time);
 		System.out.println("Room: "+room+"\n\n");
@@ -68,7 +68,8 @@ class ClassMove {
 			while(go){
 
 				System.out.print("\033[2J\033[1;1H");
-		
+				printData(crn,days,time,room);
+						
 				System.out.println("Input the CRN of the class you would like to move or QUIT to stop.");
 				
 				System.out.println("\nExample: \"10902\" \n");
@@ -107,6 +108,7 @@ class ClassMove {
 
 				while(go){	
 					System.out.print("\033[2J\033[1;1H");
+					printData(crn,days,time,room);
 					System.out.println("The class you want to move has time conflicts with all times.\nDo you want to prioritize Seniors? Yes or No? \n");
 					input = input(user_input.next());
 					if(input.equals("YES")) {
@@ -133,6 +135,7 @@ class ClassMove {
 			{
 				while(go){	
 					System.out.print("\033[2J\033[1;1H");
+					printData(crn,days,time,room);
 					System.out.println("Choose one of the following available times in which to move the class to:\n");
 					
 					if(numCon != null){
@@ -158,16 +161,14 @@ class ClassMove {
 
 				while(go){	
 					System.out.print("\033[2J\033[1;1H");
+					printData(crn,days,time,room);
 					System.out.println("Choose one of the following rooms: \n");
 					List<Integer> rem = new ArrayList<Integer>();
-					for(int i = 0; i < temp.size();i++){
-						if(!nr.compare_room(temp.get(i),crn)){
-							rem.add(i);
-						}
-					}
-					for(int i = 0; i < rem.size(); i++){
-						temp.remove(rem.get(i));
-					}
+					for(int x = 0; x < temp.size();x++)
+			       	{
+			       		if(!nr.compare_room(temp.get(x),crn))
+			       			temp.remove(x);
+			       	}
 					nr.printList(temp);
 					room = input(user_input.next());
 
@@ -182,7 +183,8 @@ class ClassMove {
 				go = !go;
 
 				System.out.print("\033[2J\033[1;1H");
-				System.out.println("\n\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+room+" room of the MBB\n\n\n");
+				printData(crn,days,time,room);
+				System.out.println("\nYou can move the class with CRN:"+crn+" to the days "+days+" at "+time+" in the "+room+" room of the MBB\n\n\n");
 			}
 			else
 
