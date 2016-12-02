@@ -50,6 +50,7 @@ public class GUI4{
 			List<String> student = test.getStudentFromCourse_CRN(temp_crn);
 			for(int x = 0; x < test.number_of_student(temp_crn); x++)
 			{
+				/*
 				if(test.in_this_class(student.get(x),time,days))
 				{
 					verbLabel[x] = new JLabel("");
@@ -58,6 +59,8 @@ public class GUI4{
 					panel.add(adjLabel[x], right);
 				}
 				else
+				*/ 
+				if(test.in_this_class(student.get(x),time,days) == false)
 				{
 					verbLabel[x] = new JLabel("<html><font color='red'>--TIMECONFLICT--</font></html>");
 					adjLabel[x] = new JLabel(student.get(x)+" "+test.findStudentname(student.get(x))+" "+test.classification(student.get(x)));
@@ -85,7 +88,7 @@ public class GUI4{
 			frame.setVisible(true);
 			frame.setTitle("Move Class Project");
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			frame.setResizable(false);
+			frame.setResizable(true);
 			frame.setLocationRelativeTo(null);          // Center window.
 		}
 		catch(SQLException e)
