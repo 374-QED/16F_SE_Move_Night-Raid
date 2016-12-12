@@ -21,8 +21,9 @@ public class GUI4{
 
 			frame = new JFrame();
 			JPanel panel = new JPanel();
+			String course = test.crnToClass(temp_crn);
 
-			JLabel title = new JLabel(" You moved this CRN: "+temp_crn+" to "+time+" in room "+room+". ");
+			JLabel title = new JLabel(" You moved this CRN: "+temp_crn+"/ "+course+" to "+time+" in room "+room+". ");
 			JButton madLibButton = new JButton("HOME");
         	madLibButton.addActionListener(new ConvertBtnListener()); //Note 5
 
@@ -101,7 +102,7 @@ public class GUI4{
 			frame.setResizable(true);
 			frame.setLocationRelativeTo(null);          // Center window.
 		}
-		catch(SQLException e)
+		catch(Exception e)
 		{
 
 		}

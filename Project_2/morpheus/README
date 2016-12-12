@@ -1,0 +1,18 @@
+README:
+
+
+******* Team Members *******
+Aldo
+Darius
+Nattapat
+
+
+
+******** How to Run the UI/ GUI ********
+
+
+1. To run the UI on a MAC: run "go_MacOS"
+   To run the GUI on a MAC: run "runGUI_MacOS"
+
+   To run the UI on a Windows: run "go.bat"
+   To run the GUI on a Windows: run "runGUI.bat"

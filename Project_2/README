@@ -1,0 +1,39 @@
+README:
+
+
+******* Team Members *******
+Aldo
+Darius
+Nattapat
+
+
+
+
+**********Current Directory Details*************
+
+**docs
+	- contains most of the documents created for this project
+
+**morpheus
+	- contains the bulk of this project. All java, resources, and sql stuff is in here.
+
+
+
+
+
+
+
+
+
+
+
+
+******** How to Run the UI/ GUI ********
+
+1. cd into the "morpheus" folder.
+
+2. To run the UI on a MAC: run "go_MacOS"
+   To run the GUI on a MAC: run "runGUI_MacOS"
+
+   To run the UI on a Windows: run "go.bat"
+   To run the GUI on a Windows: run "runGUI.bat"

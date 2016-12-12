@@ -1,0 +1,2 @@
+javac -cp "jars/*:.:resources/SQLite/*" implementation/SQLiteAccess.java implementation/nrLib.java implementation/ClassMove.java implementation/CSVparser.java
+java -cp "jars/*:." implementation.MoveClass
